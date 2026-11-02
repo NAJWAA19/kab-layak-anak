@@ -1,0 +1,1043 @@
+/* =========================================================================
+   MODERN LAYAK ANAK
+   Desain ulang halaman Profil, Hak Anak, Program, Berita, Galeri, Paparan,
+   Kontak agar konsisten dengan tema ramah anak: pastel, transparan,
+   gradient lembut, radius besar, shadow ringan.
+
+   - Di-load PALING AKHIR di public_header.php (setelah hero-anim.css),
+     jadi menimpa style.css / galeri.css / paparan.css / hero-anim.css.
+   - Semua aturan dibungkus body.has-page-bg, sehingga hanya 7 halaman
+     publik yang terpengaruh. Halaman admin (admin_header.php) tidak
+     memuat file ini sama sekali.
+   - Tidak ada selektor yang menyentuh struktur/tombol/JS: .js-slider,
+     .page-slide, .hero-arrow, .hero-dots, .reveal tetap dipakai apa adanya.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------------
+   1. TOKEN DESAIN
+   ------------------------------------------------------------------------ */
+body.has-page-bg {
+    --ink: #14305c;
+    --ink-soft: #4c5f7e;
+    --brand: #1976d2;
+    --violet: #7c3aed;
+    --pink: #ec4899;
+    --mint: #10b981;
+    --amber: #f59e0b;
+
+    --glass: rgba(255, 255, 255, .74);
+    --glass-strong: rgba(255, 255, 255, .9);
+    --stroke: rgba(255, 255, 255, .85);
+
+    --r-xl: 30px;
+    --r-lg: 24px;
+    --r-md: 18px;
+    --r-sm: 14px;
+
+    --shadow: 0 14px 36px rgba(16, 42, 83, .10);
+    --shadow-lift: 0 26px 58px rgba(16, 42, 83, .16);
+
+    --pastel-sky: linear-gradient(155deg, rgba(224, 242, 254, .95), rgba(255, 255, 255, .80));
+    --pastel-blush: linear-gradient(155deg, rgba(252, 231, 243, .95), rgba(255, 255, 255, .80));
+    --pastel-mint: linear-gradient(155deg, rgba(209, 250, 229, .95), rgba(255, 255, 255, .80));
+    --pastel-lilac: linear-gradient(155deg, rgba(237, 233, 254, .95), rgba(255, 255, 255, .80));
+    --pastel-butter: linear-gradient(155deg, rgba(254, 243, 199, .95), rgba(255, 255, 255, .80));
+    --pastel-peach: linear-gradient(155deg, rgba(255, 237, 213, .95), rgba(255, 255, 255, .80));
+}
+
+/* ------------------------------------------------------------------------
+   2. TIPOGRAFI
+   Catatan: warna hanya diterapkan di konten section, TIDAK di body.
+   Kalau diset di body, footer & header navigasi (yang ada di dalam body
+   yang sama) akan ikut berubah dan teksnya jadi gelap di atas latar gelap.
+   ------------------------------------------------------------------------ */
+
+/* Pill label - konsisten di seluruh halaman */
+body.has-page-bg .section-label {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(25, 118, 210, .14), rgba(124, 58, 237, .14));
+    border: 1px solid rgba(255, 255, 255, .7);
+    color: #1d4ed8;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(16, 42, 83, .06);
+}
+/* Label di atas header gelap harus tetap terang */
+body.has-page-bg .page-header .section-label,
+body.has-page-bg .gallery-page-header .section-label {
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .28);
+    color: #bae6fd;
+    text-shadow: 0 1px 6px rgba(3, 12, 28, .5);
+}
+
+/* Judul section */
+body.has-page-bg .section-title {
+    max-width: 720px;
+    margin: 0 auto 46px;
+    text-align: center;
+}
+body.has-page-bg .section-title h2 {
+    font-size: clamp(26px, 3.4vw, 36px);
+    margin-bottom: 14px;
+}
+body.has-page-bg .section-title > p:last-child {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+/* ------------------------------------------------------------------------
+   3. HEADER HALAMAN (foto + gradient agar menyatu)
+   ------------------------------------------------------------------------ */
+body.has-page-bg .page-header {
+    border-radius: 0 0 40px 40px;
+    overflow: hidden;
+    box-shadow: 0 26px 54px -30px rgba(6, 20, 44, .75);
+    /* lapisan: gelap untuk keterbacaan + warna pastel agar foto tidak
+       terlihat seperti gambar yang ditempel */
+    background-image:
+        linear-gradient(180deg,
+            rgba(6, 20, 44, .58) 0%,
+            rgba(6, 20, 44, .40) 48%,
+            rgba(6, 20, 44, .74) 100%),
+        linear-gradient(118deg,
+            rgba(124, 58, 237, .34) 0%,
+            rgba(236, 72, 153, .22) 46%,
+            rgba(25, 118, 210, .34) 100%),
+        var(--page-bg-photo);
+    background-size: cover, cover, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-attachment: fixed, fixed, fixed;
+}
+body.has-page-bg .page-header h1 {
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -.03em;
+}
+body.has-page-bg .page-header p:not(.section-label) {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .95);
+}
+
+/* ------------------------------------------------------------------------
+   4. SLIDER HALAMAN DALAM (page_slider.php) - hanya tampilan
+   ------------------------------------------------------------------------ */
+body.has-page-bg .page-slider-wrap {
+    padding: clamp(26px, 4vw, 44px) 7% clamp(14px, 2vw, 22px);
+    background:
+        radial-gradient(1000px 240px at 15% 0%, rgba(147, 197, 253, .35), transparent 70%),
+        radial-gradient(900px 240px at 85% 10%, rgba(251, 207, 232, .38), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .2));
+}
+body.has-page-bg .page-art {
+    gap: 20px;
+    padding: 24px 30px;
+    border-radius: var(--r-xl);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .82));
+    border: 1px solid rgba(255, 255, 255, .95);
+    box-shadow: 0 22px 50px rgba(16, 42, 83, .13);
+}
+body.has-page-bg .page-art::after {
+    background:
+        radial-gradient(circle at 88% 12%, rgba(255, 255, 255, .85), transparent 45%),
+        radial-gradient(circle at 5% 100%, var(--art-tint, rgba(219, 234, 254, .6)), transparent 55%);
+}
+body.has-page-bg .art-blue  { --art-accent: #1976d2; --art-soft: #dbeafe; --art-tint: rgba(191, 219, 254, .7); }
+body.has-page-bg .art-green { --art-accent: #059669; --art-soft: #d1fae5; --art-tint: rgba(167, 243, 208, .7); }
+body.has-page-bg .art-pink  { --art-accent: #db2777; --art-soft: #fce7f3; --art-tint: rgba(251, 207, 232, .7); }
+
+body.has-page-bg .page-art-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: linear-gradient(140deg, var(--art-soft, #dbeafe), #fff);
+    color: var(--art-accent, #1976d2);
+    box-shadow: 0 10px 24px rgba(16, 42, 83, .12);
+    border: 1px solid rgba(255, 255, 255, .9);
+}
+body.has-page-bg .page-art-text strong {
+    color: var(--ink);
+    font-size: 19px;
+    letter-spacing: -.02em;
+}
+body.has-page-bg .page-art-text span {
+    color: var(--ink-soft);
+    font-size: 14px;
+}
+body.has-page-bg .page-slider .hero-arrow {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, .92);
+    border: 1px solid rgba(255, 255, 255, .9);
+    color: var(--brand);
+    box-shadow: 0 10px 26px rgba(16, 42, 83, .16);
+}
+body.has-page-bg .page-slider .hero-arrow:hover {
+    background: linear-gradient(135deg, #1976d2, #7c3aed);
+    color: #fff;
+}
+body.has-page-bg .hero-dots button {
+    background: rgba(20, 48, 92, .2);
+}
+body.has-page-bg .hero-dots button.active {
+    background: linear-gradient(90deg, #1976d2, #ec4899);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, .35);
+}
+
+/* ------------------------------------------------------------------------
+   5. SECTION - hapus kotak putih kaku, ganti gradient transparan pastel
+   ------------------------------------------------------------------------ */
+body.has-page-bg .profile-section,
+body.has-page-bg .purpose,
+body.has-page-bg .rights-intro,
+body.has-page-bg .kelembagaan-section,
+body.has-page-bg .rights-clusters,
+body.has-page-bg .program,
+body.has-page-bg .contact-section,
+body.has-page-bg .gallery-page,
+body.has-page-bg .paparan-content {
+    position: relative;
+    padding: clamp(54px, 7vw, 88px) 8%;
+    background: none;
+    /* warna dasar teks konten; komponen yang butuh warna lain
+       (mis. .kelembagaan-text yang putih) tetap menang karena
+       selektor sendiri lebih spesifik daripada pewarisan */
+    color: var(--ink);
+}
+body.has-page-bg .profile-section h1, body.has-page-bg .profile-section h2, body.has-page-bg .profile-section h3,
+body.has-page-bg .purpose h2, body.has-page-bg .purpose h3,
+body.has-page-bg .rights-intro h2, body.has-page-bg .rights-intro h3,
+body.has-page-bg .rights-clusters h2, body.has-page-bg .rights-clusters h3,
+body.has-page-bg .program h2, body.has-page-bg .program h3,
+body.has-page-bg .contact-section h2, body.has-page-bg .contact-section h3,
+body.has-page-bg .gallery-page h2, body.has-page-bg .gallery-page h3 {
+    color: var(--ink);
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+body.has-page-bg .profile-section {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(234, 247, 255, .70));
+}
+body.has-page-bg .purpose {
+    background: linear-gradient(180deg, rgba(240, 249, 255, .80), rgba(253, 242, 248, .70));
+}
+body.has-page-bg .rights-intro {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .86), rgba(237, 233, 254, .70));
+}
+body.has-page-bg .kelembagaan-section {
+    background: linear-gradient(180deg, rgba(236, 253, 245, .76), rgba(255, 255, 255, .74));
+}
+body.has-page-bg .rights-clusters {
+    background: linear-gradient(180deg, rgba(255, 251, 235, .78), rgba(255, 255, 255, .74));
+}
+body.has-page-bg .program {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(240, 249, 255, .72));
+}
+body.has-page-bg .contact-section {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .86), rgba(236, 253, 245, .72));
+}
+body.has-page-bg .gallery-page {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(253, 242, 248, .70));
+    /* --gp-pad-y / --gp-pad-x dipakai .gallery-page-header (margin negatif)
+       supaya header-nya full-bleed. Harus sama persis dengan padding
+       section ini, kalau tidak ada jarak celah di kiri/atas. */
+    --gp-pad-y: clamp(54px, 7vw, 88px);
+    --gp-pad-x: 8%;
+    padding: var(--gp-pad-y) var(--gp-pad-x);
+}
+body.has-page-bg .paparan-content {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(245, 243, 255, .72));
+}
+/* Pemisah lembut antar section */
+body.has-page-bg .profile-section + .profile-section,
+body.has-page-bg .rights-intro + .kelembagaan-section,
+body.has-page-bg .purpose,
+body.has-page-bg .rights-clusters {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75);
+}
+
+/* ------------------------------------------------------------------------
+   6. PANEL TEKS (Profil & Hak Anak) - kaca, bukan kotak putih
+   ------------------------------------------------------------------------ */
+body.has-page-bg .profile-content,
+body.has-page-bg .rights-intro-content {
+    max-width: 880px;
+    margin: auto;
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 50px);
+    background: linear-gradient(150deg, rgba(255, 255, 255, .88), rgba(255, 255, 255, .70));
+    border: 1px solid var(--stroke);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow);
+}
+body.has-page-bg .profile-content h2,
+body.has-page-bg .rights-intro-content h2 {
+    font-size: clamp(24px, 3.2vw, 34px);
+    line-height: 1.25;
+    margin-bottom: 22px;
+}
+body.has-page-bg .profile-content p:not(.section-label),
+body.has-page-bg .rights-intro-content p:not(.section-label) {
+    font-size: 16.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+}
+body.has-page-bg .profile-content ol {
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    line-height: 1.8;
+    margin: 0 0 20px 24px;
+    padding: 0;
+}
+body.has-page-bg .profile-content ol li {
+    margin-bottom: 12px;
+    padding-left: 6px;
+}
+body.has-page-bg .profile-content ol li::marker {
+    color: var(--pink);
+    font-weight: 800;
+}
+body.has-page-bg .profile-content strong,
+body.has-page-bg .rights-intro-content strong {
+    color: var(--brand);
+}
+
+/* ------------------------------------------------------------------------
+   7. KARTU TUJUAN (Profil)
+   ------------------------------------------------------------------------ */
+body.has-page-bg .purpose-container {
+    gap: 26px;
+}
+body.has-page-bg .purpose-card {
+    padding: 32px 28px;
+    border-radius: var(--r-lg);
+    background: var(--pastel-sky);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s, opacity .35s;
+}
+body.has-page-bg .purpose-container .purpose-card:nth-child(3n + 2) {
+    background: var(--pastel-blush);
+}
+body.has-page-bg .purpose-container .purpose-card:nth-child(3n + 3) {
+    background: var(--pastel-mint);
+}
+body.has-page-bg .purpose-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lift);
+}
+body.has-page-bg .purpose-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    height: 46px;
+    margin-bottom: 18px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .85);
+    color: var(--brand);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 16px rgba(16, 42, 83, .10);
+}
+body.has-page-bg .purpose-card h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+body.has-page-bg .purpose-card p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* ------------------------------------------------------------------------
+   8. KARTU KLASTER HAK ANAK
+   ------------------------------------------------------------------------ */
+body.has-page-bg .rights-container {
+    gap: 26px;
+}
+body.has-page-bg .right-card {
+    padding: 32px;
+    border-radius: var(--r-xl);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s, opacity .35s;
+}
+body.has-page-bg .right-card:hover {
+    transform: translateY(-9px);
+    box-shadow: var(--shadow-lift);
+}
+body.has-page-bg .right-number {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .8);
+    color: var(--ink-soft);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(16, 42, 83, .07);
+}
+body.has-page-bg .right-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .88);
+    box-shadow: 0 8px 20px rgba(16, 42, 83, .12);
+    backdrop-filter: blur(6px);
+}
+body.has-page-bg .right-card h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+body.has-page-bg .right-card p {
+    font-size: 14.5px;
+    line-height: 1.8;
+    opacity: 1;
+    color: var(--ink-soft);
+}
+body.has-page-bg .cluster-link {
+    padding: 9px 18px;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, .88);
+    border: 1px solid rgba(255, 255, 255, .95);
+    box-shadow: 0 6px 16px rgba(16, 42, 83, .10);
+    color: var(--ink);
+}
+body.has-page-bg .cluster-link:hover {
+    background: #fff;
+    transform: translateX(4px);
+}
+/* Warna klaster - gradient lebih lembut & konsisten */
+body.has-page-bg .cluster-1 { background: linear-gradient(150deg, #e0f2fe, #f0f9ff); border-color: rgba(147, 197, 253, .7); }
+body.has-page-bg .cluster-2 { background: linear-gradient(150deg, #fef3c7, #fff7ed); border-color: rgba(253, 230, 138, .7); }
+body.has-page-bg .cluster-3 { background: linear-gradient(150deg, #d1fae5, #ecfdf5); border-color: rgba(167, 243, 208, .7); }
+body.has-page-bg .cluster-4 { background: linear-gradient(150deg, #ede9fe, #f5f3ff); border-color: rgba(196, 181, 253, .7); }
+body.has-page-bg .cluster-5 { background: linear-gradient(150deg, #fce7f3, #fff1f2); border-color: rgba(251, 207, 232, .7); }
+body.has-page-bg .cluster-1 .cluster-link { color: #1976d2; }
+body.has-page-bg .cluster-2 .cluster-link { color: #b45309; }
+body.has-page-bg .cluster-3 .cluster-link { color: #047857; }
+body.has-page-bg .cluster-4 .cluster-link { color: #6d28d9; }
+body.has-page-bg .cluster-5 .cluster-link { color: #be123c; }
+
+/* ------------------------------------------------------------------------
+   9. KELEMBAGAAN
+   ------------------------------------------------------------------------ */
+body.has-page-bg .kelembagaan-section {
+    padding-bottom: clamp(54px, 7vw, 88px);
+}
+body.has-page-bg .kelembagaan-card {
+    border-radius: var(--r-xl);
+    background: linear-gradient(130deg, #0d47a1 0%, #1976d2 48%, #4f7ff5 100%);
+    border: 1px solid rgba(255, 255, 255, .18);
+    box-shadow: 0 22px 52px rgba(13, 71, 161, .28);
+    padding: clamp(26px, 4vw, 38px) clamp(24px, 4vw, 42px);
+}
+body.has-page-bg .kelembagaan-icon {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .18);
+}
+body.has-page-bg .kelembagaan-btn {
+    border-radius: 999px !important;
+    padding: 14px 26px;
+    background: linear-gradient(135deg, #fff, #eef5ff);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
+}
+body.has-page-bg .kelembagaan-btn:hover {
+    transform: translateY(-3px) !important;
+    background: #fff;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .24);
+}
+
+/* ------------------------------------------------------------------------
+   10. KARTU PROGRAM & BERITA (pakai <img> yang sama)
+   ------------------------------------------------------------------------ */
+body.has-page-bg .program-container {
+    gap: 26px;
+}
+body.has-page-bg .program-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--r-lg);
+    background: var(--pastel-sky);
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s, opacity .35s;
+    overflow: hidden;
+}
+body.has-page-bg .program-container .program-card:nth-child(3n + 2) {
+    background: var(--pastel-blush);
+}
+body.has-page-bg .program-container .program-card:nth-child(3n + 3) {
+    background: var(--pastel-mint);
+}
+body.has-page-bg .program-card:hover {
+    transform: translateY(-9px);
+    box-shadow: var(--shadow-lift);
+}
+/* bar aksen hover bawaan (.program-card::before) tetap dipakai apa adanya */
+
+/* Foto: cover + gradient overlay supaya menyatu, bukan tempelan */
+body.has-page-bg .program-image {
+    position: relative;
+    height: 230px;
+    background: linear-gradient(135deg, #e0f2fe, #fce7f3);
+}
+body.has-page-bg .program-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 42%, rgba(20, 48, 92, .34) 100%),
+        linear-gradient(120deg, rgba(25, 118, 210, .18), rgba(236, 72, 153, .16));
+}
+body.has-page-bg .program-image img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .7s cubic-bezier(.2, .7, .3, 1);
+}
+body.has-page-bg .program-card:hover .program-image img {
+    transform: scale(1.07);
+}
+body.has-page-bg .program-image > span {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .9);
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+body.has-page-bg .program-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px 24px 26px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .82));
+}
+body.has-page-bg .program-content span {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 12px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: rgba(25, 118, 210, .12);
+    color: #1d4ed8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+body.has-page-bg .program-content h3 {
+    font-size: 19px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+body.has-page-bg .program-content p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.72;
+    margin-bottom: 20px;
+    flex: 1;
+}
+body.has-page-bg .program-content a {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #1976d2, #7c3aed);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(25, 118, 210, .3);
+    transition: transform .25s, box-shadow .25s;
+}
+body.has-page-bg .program-content a:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(124, 58, 237, .35);
+}
+
+/* ------------------------------------------------------------------------
+   11. GALERI
+   ------------------------------------------------------------------------ */
+body.has-page-bg .gallery-page-header {
+    border-radius: 0 0 34px 34px;
+    margin-bottom: 46px;
+    padding: clamp(48px, 6vw, 74px) 8% clamp(40px, 5vw, 60px);
+    background-image:
+        linear-gradient(180deg,
+            rgba(6, 20, 44, .58) 0%,
+            rgba(6, 20, 44, .40) 48%,
+            rgba(6, 20, 44, .74) 100%),
+        linear-gradient(118deg,
+            rgba(124, 58, 237, .34),
+            rgba(236, 72, 153, .22) 46%,
+            rgba(25, 118, 210, .34)),
+        var(--page-bg-photo);
+    background-color: #0a1e3c;
+    background-size: cover, cover, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-attachment: fixed, fixed, fixed;
+    box-shadow: 0 26px 54px -30px rgba(6, 20, 44, .75);
+}
+body.has-page-bg .gallery-page-header h1 {
+    color: #fff;
+    font-size: clamp(28px, 4.4vw, 42px);
+    letter-spacing: -.03em;
+    text-shadow: 0 2px 12px rgba(3, 12, 28, .55);
+}
+body.has-page-bg .gallery-page-header p:not(.section-label) {
+    color: rgba(255, 255, 255, .94);
+    line-height: 1.75;
+    text-shadow: 0 1px 6px rgba(3, 12, 28, .5);
+}
+body.has-page-bg .gallery-public-container {
+    gap: 26px;
+}
+body.has-page-bg .gallery-public-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--r-lg);
+    background: linear-gradient(155deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .78));
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s, opacity .35s;
+}
+body.has-page-bg .gallery-public-card:hover {
+    transform: translateY(-9px);
+    box-shadow: var(--shadow-lift);
+}
+body.has-page-bg .gallery-public-image {
+    position: relative;
+    height: 230px;
+    background: linear-gradient(135deg, #e0f2fe, #fce7f3);
+}
+body.has-page-bg .gallery-public-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 45%, rgba(20, 48, 92, .38) 100%),
+        linear-gradient(120deg, rgba(124, 58, 237, .16), rgba(236, 72, 153, .16));
+}
+body.has-page-bg .gallery-public-image img,
+body.has-page-bg .gallery-public-image .gallery-no-image {
+    position: relative;
+    z-index: 2;
+}
+body.has-page-bg .gallery-public-image img {
+    transition: transform .7s cubic-bezier(.2, .7, .3, 1);
+}
+body.has-page-bg .gallery-public-card:hover .gallery-public-image img {
+    transform: scale(1.07);
+}
+body.has-page-bg .gallery-public-image .gallery-no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(25, 118, 210, .45);
+}
+body.has-page-bg .gallery-public-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 22px 24px 24px;
+}
+body.has-page-bg .gallery-public-content h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+body.has-page-bg .gallery-public-content p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    flex: 1;
+}
+body.has-page-bg .album-foto-badge {
+    z-index: 3;
+    background: rgba(20, 48, 92, .72);
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 999px;
+    padding: 6px 14px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .22);
+}
+body.has-page-bg .album-view-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(25, 118, 210, .12), rgba(124, 58, 237, .12));
+    border: 1px solid rgba(255, 255, 255, .85);
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform .25s, background .25s, gap .25s;
+}
+body.has-page-bg .album-view-btn:hover {
+    gap: 12px;
+    background: linear-gradient(135deg, #1976d2, #7c3aed);
+    color: #fff;
+}
+
+/* ------------------------------------------------------------------------
+   12. PAPARAN (ringan saja - modal & tombolnya tidak disentuh)
+   ------------------------------------------------------------------------ */
+body.has-page-bg .paparan-section-title {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+body.has-page-bg .paparan-card {
+    border-radius: var(--r-lg);
+    background: linear-gradient(155deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .78));
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s, opacity .35s;
+}
+body.has-page-bg .paparan-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-lift);
+}
+
+/* ------------------------------------------------------------------------
+   13. KONTAK
+   ------------------------------------------------------------------------ */
+body.has-page-bg .contact-container {
+    gap: clamp(28px, 4vw, 48px);
+    align-items: start;
+}
+body.has-page-bg .contact-info {
+    padding: clamp(26px, 3.4vw, 40px);
+    background: linear-gradient(150deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .72));
+    border: 1px solid var(--stroke);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow);
+}
+body.has-page-bg .contact-info h2 {
+    font-size: clamp(24px, 3vw, 32px);
+    margin-bottom: 16px;
+}
+body.has-page-bg .contact-info > p:not(.section-label) {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+body.has-page-bg .contact-item {
+    margin-bottom: 14px;
+    padding: 16px 18px;
+    border-radius: var(--r-md);
+    background: var(--pastel-sky);
+    border: 1px solid rgba(255, 255, 255, .85);
+    transition: transform .25s, box-shadow .25s;
+}
+body.has-page-bg .contact-item:nth-of-type(3n + 2) { background: var(--pastel-mint); }
+body.has-page-bg .contact-item:nth-of-type(3n + 3) { background: var(--pastel-blush); }
+body.has-page-bg .contact-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 26px rgba(16, 42, 83, .10);
+}
+body.has-page-bg .contact-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    color: var(--ink);
+}
+body.has-page-bg .contact-item p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.7;
+}
+body.has-page-bg .contact-item a:not(.album-view-btn) {
+    font-weight: 700;
+}
+
+body.has-page-bg .contact-form {
+    padding: clamp(26px, 3.4vw, 40px);
+    background: rgba(255, 255, 255, .9);
+    border: 1px solid var(--stroke);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+body.has-page-bg .contact-form h2 {
+    font-size: clamp(22px, 2.6vw, 28px);
+    margin-bottom: 10px;
+}
+body.has-page-bg .contact-form-description {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+body.has-page-bg .contact-form .form-group {
+    margin-bottom: 18px;
+}
+body.has-page-bg .contact-form .form-group label {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(25, 118, 210, .1);
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+body.has-page-bg .contact-form .form-group input,
+body.has-page-bg .contact-form .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e6edf7;
+    border-radius: var(--r-md);
+    background: #fff;
+    color: var(--ink);
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    font-size: 15px;
+    transition: border-color .25s, box-shadow .25s, background .25s;
+}
+body.has-page-bg .contact-form .form-group input::placeholder,
+body.has-page-bg .contact-form .form-group textarea::placeholder {
+    color: #9aa9c0;
+}
+body.has-page-bg .contact-form .form-group input:focus,
+body.has-page-bg .contact-form .form-group textarea:focus {
+    outline: none;
+    border-color: #1976d2;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(25, 118, 210, .14);
+}
+body.has-page-bg .contact-form button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: var(--r-md);
+    background: linear-gradient(135deg, #1976d2 0%, #7c3aed 55%, #ec4899 100%);
+    color: #fff;
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    font-size: 15.5px;
+    font-weight: 800;
+    letter-spacing: .4px;
+    cursor: pointer;
+    box-shadow: 0 14px 32px rgba(124, 58, 237, .32);
+    transition: transform .25s, box-shadow .25s, filter .25s;
+}
+body.has-page-bg .contact-form button:hover {
+    filter: brightness(1.06);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 42px rgba(124, 58, 237, .4);
+}
+body.has-page-bg .contact-form button:active {
+    transform: translateY(0) scale(.99);
+}
+body.has-page-bg .contact-form .alert.error {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border-radius: var(--r-md);
+    background: linear-gradient(135deg, #fef2f2, #fff1f2);
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    font-size: 14.5px;
+    font-weight: 600;
+}
+
+/* ------------------------------------------------------------------------
+   14. EMPTY STATE
+   ------------------------------------------------------------------------ */
+body.has-page-bg .empty-public-news,
+body.has-page-bg .empty-gallery,
+body.has-page-bg .paparan-empty {
+    text-align: center;
+    padding: clamp(44px, 6vw, 64px) 30px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .85), rgba(240, 249, 255, .75));
+    border: 2px dashed rgba(148, 163, 184, .5);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow);
+}
+body.has-page-bg .empty-public-news h3,
+body.has-page-bg .empty-gallery h3,
+body.has-page-bg .paparan-empty h3 {
+    font-size: 20px;
+    color: var(--ink);
+}
+body.has-page-bg .empty-public-news p,
+body.has-page-bg .empty-gallery p,
+body.has-page-bg .paparan-empty p {
+    color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------------
+   15. RESPONSIF
+   ------------------------------------------------------------------------ */
+@media (max-width: 980px) {
+    body.has-page-bg .contact-container {
+        grid-template-columns: 1fr;
+    }
+    body.has-page-bg .page-slider .hero-arrow {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 900px) {
+    body.has-page-bg .program-container,
+    body.has-page-bg .rights-container,
+    body.has-page-bg .purpose-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    body.has-page-bg .page-header {
+        border-radius: 0 0 30px 30px;
+    }
+    body.has-page-bg .gallery-page-header {
+        border-radius: 0 0 26px 26px;
+    }
+}
+
+@media (max-width: 760px) {
+    body.has-page-bg .page-art {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px 18px;
+        border-radius: var(--r-lg);
+    }
+    body.has-page-bg .page-slider .hero-arrow {
+        top: 42%;
+    }
+    body.has-page-bg .page-slider .hero-arrow.prev { left: 4px; }
+    body.has-page-bg .page-slider .hero-arrow.next { right: 4px; }
+    body.has-page-bg .contact-item:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 640px) {
+    body.has-page-bg .gallery-page {
+        --gp-pad-y: 46px;
+        --gp-pad-x: 5%;
+    }
+    body.has-page-bg .program-container,
+    body.has-page-bg .rights-container,
+    body.has-page-bg .purpose-container {
+        grid-template-columns: 1fr;
+    }
+    body.has-page-bg .profile-content,
+    body.has-page-bg .rights-intro-content,
+    body.has-page-bg .contact-info,
+    body.has-page-bg .contact-form {
+        border-radius: var(--r-lg);
+    }
+    body.has-page-bg .program-card,
+    body.has-page-bg .purpose-card,
+    body.has-page-bg .gallery-public-card,
+    body.has-page-bg .right-card {
+        border-radius: 20px;
+    }
+    body.has-page-bg .right-card {
+        padding: 26px 22px;
+        min-height: auto;
+    }
+    body.has-page-bg .kelembagaan-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    body.has-page-bg .kelembagaan-left {
+        flex-direction: column;
+        gap: 14px;
+    }
+    body.has-page-bg .kelembagaan-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 520px) {
+    body.has-page-bg .page-header,
+    body.has-page-bg .gallery-page-header {
+        border-radius: 0 0 24px 24px;
+    }
+    body.has-page-bg .section-label {
+        font-size: 10.5px;
+        padding: 6px 13px;
+        letter-spacing: 1.2px;
+    }
+    body.has-page-bg .program-image,
+    body.has-page-bg .gallery-public-image {
+        height: 200px;
+    }
+    body.has-page-bg .page-slider-wrap {
+        padding: 22px 5% 10px;
+    }
+    body.has-page-bg .program-content,
+    body.has-page-bg .gallery-public-content {
+        padding: 20px 20px 22px;
+    }
+}
+
+/* Aksesibilitas: kurangi gerak bila diminta sistem */
+@media (prefers-reduced-motion: reduce) {
+    body.has-page-bg .program-card,
+    body.has-page-bg .purpose-card,
+    body.has-page-bg .right-card,
+    body.has-page-bg .gallery-public-card,
+    body.has-page-bg .paparan-card,
+    body.has-page-bg .program-image img,
+    body.has-page-bg .gallery-public-image img {
+        transition: none;
+    }
+}
+
+/* Halaman detail ("Selengkapnya") memakai latar yang sama dengan
+   halaman daftarnya: foto body menembus tipis lewat section transparan,
+   sedangkan kartu isi tetap putih solid. */
+body.has-page-bg .detail-news,
+body.has-page-bg .program-detail,
+body.has-page-bg .cluster-detail {
+    background-color: rgba(255, 255, 255, 0.68);
+}

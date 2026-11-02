@@ -1,0 +1,446 @@
+﻿/* ==================================================
+   PAPARAN PAGE - PUBLIC STYLES
+   ================================================== */
+
+.paparan-content {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 50px 25px 80px;
+    flex: 1;
+}
+
+/* ----- HEADER ----- */
+.paparan-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 36px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.paparan-section-title h2 {
+    font-size: 28px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.paparan-section-title p {
+    color: #64748b;
+    font-size: 14.5px;
+}
+
+.paparan-stats {
+    display: flex;
+    gap: 8px;
+}
+
+.paparan-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.paparan-stat i {
+    color: #1976d2;
+    font-size: 11px;
+}
+
+/* ----- GRID ----- */
+.paparan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ----- CARD ----- */
+.paparan-card {
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.paparan-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(15,23,42,.08);
+}
+
+/* ----- THUMBNAIL (GAMBAR) ----- */
+.paparan-card-thumb {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    background: #f1f5f9;
+}
+
+.paparan-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s;
+}
+
+.paparan-card:hover .paparan-card-thumb img {
+    transform: scale(1.04);
+}
+
+.paparan-thumb-view {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(4px);
+    color: #1e293b;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: .25s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.paparan-card:hover .paparan-thumb-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----- DOCUMENT (PDF) ----- */
+.paparan-card-doc {
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(145deg, #fef2f2, #fff5f5);
+    border-bottom: 1px solid #fee2e2;
+}
+
+.paparan-doc-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: rgba(220,38,38,.08);
+    color: #dc2626;
+}
+
+.paparan-doc-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.paparan-doc-ext {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    background: rgba(220,38,38,.08);
+    color: #dc2626;
+}
+
+.paparan-doc-size {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+/* ----- PDF PREVIEW (ELEGANT) ----- */
+.paparan-card-pdf {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid #e2e8f0;
+    background: #fff;
+}
+
+.paparan-card-pdf iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
+.paparan-card-pdf::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, #fff 0%, transparent 100%);
+    pointer-events: none;
+}
+
+/* ----- CARD BODY ----- */
+.paparan-card-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.paparan-card-body h3 {
+    font-size: 15px;
+    color: #1e293b;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.paparan-card-body > p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+    flex: 1;
+}
+
+.paparan-card-meta {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.paparan-card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #94a3b8;
+    font-size: 11.5px;
+}
+
+/* ----- ACTIONS ----- */
+.paparan-card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.paparan-btn-primary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .2s;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(25,118,210,.2);
+}
+
+.paparan-btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(25,118,210,.3);
+    transform: translateY(-1px);
+}
+
+.paparan-btn-secondary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .2s;
+    border: none;
+    cursor: pointer;
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.paparan-btn-secondary:hover {
+    background: #f1f5f9;
+}
+
+/* ----- EMPTY ----- */
+.paparan-empty {
+    grid-column: 1 / -1;
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 56px 25px;
+    text-align: center;
+}
+
+.paparan-empty-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1976d2;
+    font-size: 26px;
+}
+
+.paparan-empty h3 {
+    color: #1e293b;
+    font-size: 19px;
+    margin-bottom: 6px;
+}
+
+.paparan-empty p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* ----- MODAL ----- */
+.paparan-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.7);
+    z-index: 9999;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+}
+
+.paparan-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paparan-modal-box {
+    width: 100%;
+    max-width: 1060px;
+    height: 90vh;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 60px rgba(0,0,0,.25);
+}
+
+.paparan-modal-header {
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.paparan-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.paparan-modal-title i { color: #1976d2; font-size: 14px; }
+
+.paparan-modal-title h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paparan-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.paparan-modal-close {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #fff;
+    color: #475569;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .15s;
+}
+
+.paparan-modal-close:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.paparan-modal-content {
+    flex: 1;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+#paparanPdfViewer { width: 100%; height: 100%; border: none; }
+
+#paparanImgWrap {
+    display: none;
+    flex: 1;
+    overflow: auto;
+    background: #0f172a;
+    text-align: center;
+    padding: 20px;
+}
+
+#paparanImgViewer {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 900px) {
+    .paparan-grid { grid-template-columns: repeat(2, 1fr); }
+    .paparan-section-header { flex-direction: column; align-items: flex-start; }
+    .paparan-stats { width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .paparan-grid { grid-template-columns: 1fr; gap: 16px; }
+    .paparan-content { padding: 36px 16px 60px; }
+    .paparan-section-title h2 { font-size: 22px; }
+    .paparan-card-actions { flex-direction: column; }
+}

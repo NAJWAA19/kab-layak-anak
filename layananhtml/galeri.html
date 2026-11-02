@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Galeri - Layak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        /* =========================
+           HALAMAN GALERI
+        ========================== */
+
+        .gallery-page {
+            padding: 70px 7%;
+            background: #f8fafc;
+        }
+
+
+        .gallery-page-header {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+
+        .gallery-page-header .section-label {
+            color: #1976d2;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+
+        .gallery-page-header h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+            color: #111827;
+        }
+
+
+        .gallery-page-header p {
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           CONTAINER GALERI
+        ========================== */
+
+        .gallery-public-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 28px;
+
+        }
+
+
+        /* =========================
+           CARD GALERI
+        ========================== */
+
+        .gallery-public-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+        }
+
+
+        .gallery-public-card:hover {
+
+            transform:
+                translateY(-6px);
+
+            box-shadow:
+                0 14px 35px rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
+        }
+
+
+        /* =========================
+           FOTO
+        ========================== */
+
+        .gallery-public-image {
+
+            width: 100%;
+
+            height: 230px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e3f2fd,
+                    #f5f7fa
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .gallery-public-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* Jika tidak ada foto */
+
+        .gallery-no-image {
+
+            color: #1976d2;
+
+            font-weight: 700;
+
+            font-size: 16px;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================
+           ISI CARD
+        ========================== */
+
+        .gallery-public-content {
+
+            padding: 22px;
+
+        }
+
+
+        .gallery-public-content h3 {
+
+            margin: 0 0 10px;
+
+            font-size: 20px;
+
+            color: #111827;
+
+        }
+
+
+        .gallery-public-content p {
+
+            margin: 0 0 20px;
+
+            color: #6b7280;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================
+           TOMBOL
+        ========================== */
+
+        .gallery-view-button {
+
+            display: inline-block;
+
+            padding:
+                10px 18px;
+
+            background:
+                #1976d2;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            border: none;
+
+            transition:
+                background 0.3s ease;
+
+        }
+
+
+        .gallery-view-button:hover {
+
+            background:
+                #125ea7;
+
+        }
+
+
+        /* =========================
+           DATA KOSONG
+        ========================== */
+
+        .gallery-empty {
+
+            grid-column:
+                1 / -1;
+
+            text-align: center;
+
+            background: white;
+
+            padding: 60px 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
+
+        }
+
+
+        .gallery-empty h3 {
+
+            margin-bottom: 10px;
+
+            color: #111827;
+
+        }
+
+
+        .gallery-empty p {
+
+            color: #6b7280;
+
+        }
+
+
+        /* =========================
+           MODAL FOTO
+        ========================== */
+
+        .gallery-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            inset: 0;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.8
+                );
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+
+        }
+
+
+        .gallery-modal.active {
+
+            display: flex;
+
+        }
+
+
+        .gallery-modal-content {
+
+            position: relative;
+
+            max-width: 900px;
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+        }
+
+
+        .gallery-modal-image {
+
+            width: 100%;
+
+            max-height: 75vh;
+
+            object-fit: contain;
+
+            display: block;
+
+            background: #111;
+
+        }
+
+
+        .gallery-modal-caption {
+
+            padding: 20px 24px;
+
+        }
+
+
+        .gallery-modal-caption h3 {
+
+            margin:
+                0 0 8px;
+
+        }
+
+
+        .gallery-modal-caption p {
+
+            margin: 0;
+
+            color: #666;
+
+        }
+
+
+        .gallery-modal-close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 15px;
+
+            width: 42px;
+
+            height: 42px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.9
+                );
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            z-index: 2;
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (
+            max-width: 900px
+        ) {
+
+            .gallery-public-container {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .gallery-page {
+
+                padding:
+                    50px 5%;
+
+            }
+
+
+            .gallery-page-header h1 {
+
+                font-size: 32px;
+
+            }
+
+
+            .gallery-public-container {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .gallery-public-image {
+
+                height: 220px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+   <header class="main-header">
+
+    <div class="header-brand">
+
+        <div class="header-logos">
+
+            <img
+                src="img/logo-dinsos.png"
+                alt="Logo Dinas Sosial Kabupaten Magelang"
+                class="logo-dinsos"
+            >
+
+            <img
+                src="img/logo-kla.png"
+                alt="Logo Kabupaten Layak Anak"
+                class="logo-kla"
+            >
+
+        </div>
+
+        <div class="header-title">
+            <h2>KABUPATEN LAYAK ANAK</h2>
+            <span>MAGELANG</span>
+        </div>
+
+    </div>
+
+
+    <nav class="main-nav">
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a 
+            href="profil.html">
+            Profil
+        </a>
+
+        <a 
+            href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a 
+            href="program.html">
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a 
+            href="galeri.html"
+            class="active"
+            galeri
+        >
+            Galeri
+        </a>
+
+         <a href="paparan.html">
+            Paparan
+        </a>
+
+        <a 
+            href="kontak.html">
+            Kontak
+        </a>
+
+    </nav>
+
+</header>
+
+
+    <!-- =========================
+         HEADER GALERI
+    ========================== -->
+
+    <section class="gallery-page">
+
+        <div class="gallery-page-header">
+
+            <p class="section-label">
+                DOKUMENTASI
+            </p>
+
+
+            <h1>
+                Galeri Kegiatan
+            </h1>
+
+
+            <p>
+                Dokumentasi berbagai kegiatan dalam mendukung
+                pemenuhan hak dan perlindungan anak.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             GALERI DINAMIS
+        ========================== -->
+
+        <div
+            class="gallery-public-container"
+            id="galleryContainer"
+        >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MODAL FOTO
+    ========================== -->
+
+    <div
+        class="gallery-modal"
+        id="galleryModal"
+    >
+
+        <div class="gallery-modal-content">
+
+            <button
+                class="gallery-modal-close"
+                onclick="closeGalleryModal()"
+            >
+                ×
+            </button>
+
+
+            <img
+                id="modalImage"
+                class="gallery-modal-image"
+                src=""
+                alt="Foto Galeri"
+            >
+
+
+            <div class="gallery-modal-caption">
+
+                <h3 id="modalTitle">
+                    -
+                </h3>
+
+
+                <p id="modalDescription">
+                    -
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+   <!-- =========================
+     FOOTER
+========================= -->
+
+<<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <!-- TOTAL PENGUNJUNG -->
+        <div class="footer-visitors">
+
+            <h4>Total Pengunjung</h4>
+
+            <div class="visitor-number">
+                👥 <span id="totalVisitors">0</span>
+            </div>
+
+            <p>Pengunjung Website</p>
+
+            <div class="visitor-today">
+                📅 <span id="todayVisitors">0</span>
+                Pengunjung Hari Ini
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGASI -->
+        <div class="footer-links">
+
+            <h4>Navigasi</h4>
+
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="hak-anak.html">Hak Anak</a>
+            <a href="program.html">Program</a>
+
+        </div>
+
+
+        <!-- INFORMASI -->
+        <div class="footer-links">
+
+            <h4>Informasi</h4>
+
+            <a href="berita.html">Berita</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="paparan.html">Paparan</a>
+            <a href="kontak.html">Kontak</a>
+
+        </div>
+
+
+        <!-- IKUTI KAMI -->
+        <div class="footer-social">
+
+            <h4>Ikuti Kami</h4>
+
+            <div class="social-list">
+
+                <a
+                    href="https://www.instagram.com/dinsosppkbpppa_kabmagelang?stkn=MW5zY3E2NmZzeXVx"
+                    target="_blank"
+                >
+                    📷 Instagram
+                </a>
+
+                <a
+                    href="https://youtube.com/@dinsosppkbpppakabmagelang2140?si=sB44CmjzR5FT2_qU"
+                    target="_blank"
+                >
+                    ▶️ YouTube
+                </a>
+
+                <div
+                    class="phone-number"
+                    onclick="navigator.clipboard.writeText('0293788167')"
+                    title="Klik untuk menyalin nomor"
+                >
+                    ☎️ 0293788167
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Semua hak dilindungi.
+
+    </div>
+
+</footer>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+    <!-- =========================
+         JAVASCRIPT GALERI
+    ========================== -->
+
+    <script>
+
+
+        // =========================
+        // AMBIL DATA GALERI
+        // =========================
+
+        const galleryContainer =
+            document.getElementById(
+                "galleryContainer"
+            );
+
+
+        let galleryData =
+            JSON.parse(
+                localStorage.getItem(
+                    "galleryData"
+                )
+            ) || [];
+
+
+
+        // =========================
+        // TAMPILKAN GALERI
+        // =========================
+
+        function displayGallery() {
+
+
+            galleryContainer.innerHTML = "";
+
+
+            // Jika belum ada data
+
+            if (
+                galleryData.length === 0
+            ) {
+
+                galleryContainer.innerHTML = `
+
+                    <div class="gallery-empty">
+
+                        <h3>
+                            Belum Ada Dokumentasi
+                        </h3>
+
+                        <p>
+                            Foto kegiatan akan
+                            ditampilkan di halaman ini.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            // Tampilkan semua data
+
+            galleryData.forEach(
+                function(photo, index) {
+
+
+                    const card =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    card.className =
+                        "gallery-public-card";
+
+
+
+                    // =========================
+                    // FOTO
+                    // =========================
+
+                    let imageHTML = "";
+
+
+                    if (
+                        photo.image &&
+                        photo.image.trim() !== ""
+                    ) {
+
+                        imageHTML = `
+
+                            <img
+                                src="${photo.image}"
+                                alt="${escapeHTML(
+                                    photo.title ||
+                                    "Foto Galeri"
+                                )}"
+                                onerror="
+                                    this.style.display='none';
+                                    this.nextElementSibling.style.display='block';
+                                "
+                            >
+
+                            <div
+                                class="gallery-no-image"
+                                style="display:none;"
+                            >
+                                Foto tidak ditemukan
+                            </div>
+
+                        `;
+
+                    } else {
+
+                        imageHTML = `
+
+                            <div class="gallery-no-image">
+
+                                FOTO GALERI
+
+                            </div>
+
+                        `;
+
+                    }
+
+
+
+                    // =========================
+                    // CARD
+                    // =========================
+
+                    card.innerHTML = `
+
+                        <div class="gallery-public-image">
+
+                            ${imageHTML}
+
+                        </div>
+
+
+                        <div class="gallery-public-content">
+
+                            <h3>
+                                ${escapeHTML(
+                                    photo.title ||
+                                    "Dokumentasi Kegiatan"
+                                )}
+                            </h3>
+
+
+                            <p>
+                                ${escapeHTML(
+                                    photo.description ||
+                                    "Dokumentasi kegiatan Layak Anak."
+                                )}
+                            </p>
+
+
+                            ${
+                                photo.image
+                                ?
+                                `
+                                    <button
+                                        class="gallery-view-button"
+                                        onclick="openGalleryModal(
+                                            ${index}
+                                        )"
+                                    >
+                                        Lihat Foto →
+                                    </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    `;
+
+
+                    galleryContainer.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        // =========================
+        // MODAL FOTO
+        // =========================
+
+        function openGalleryModal(index) {
+
+
+            const photo =
+                galleryData[index];
+
+
+            if (
+                !photo ||
+                !photo.image
+            ) {
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "modalImage"
+            ).src =
+                photo.image;
+
+
+            document.getElementById(
+                "modalImage"
+            ).alt =
+                photo.title ||
+                "Foto Galeri";
+
+
+            document.getElementById(
+                "modalTitle"
+            ).textContent =
+                photo.title ||
+                "Dokumentasi Kegiatan";
+
+
+            document.getElementById(
+                "modalDescription"
+            ).textContent =
+                photo.description ||
+                "Dokumentasi kegiatan Layak Anak.";
+
+
+            document.getElementById(
+                "galleryModal"
+            ).classList.add(
+                "active"
+            );
+
+        }
+
+
+
+        // =========================
+        // TUTUP MODAL
+        // =========================
+
+        function closeGalleryModal() {
+
+            document.getElementById(
+                "galleryModal"
+            ).classList.remove(
+                "active"
+            );
+
+        }
+
+
+
+        // Klik area luar modal
+
+        document.getElementById(
+            "galleryModal"
+        ).addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeGalleryModal();
+
+                }
+
+            }
+        );
+
+
+
+        // =========================
+        // ESCAPE HTML
+        // =========================
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                text;
+
+
+            return div.innerHTML;
+
+        }
+
+
+
+        // =========================
+        // JALANKAN
+        // =========================
+
+        displayGallery();
+
+
+    </script>
+
+
+</body>
+
+</html>

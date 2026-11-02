@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kelola Program | Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- =========================
+     HEADER ADMIN
+========================= -->
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+
+        <h2>
+            LAYAK ANAK
+        </h2>
+
+        <span>
+            ADMIN PANEL
+        </span>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span>
+            Admin
+        </span>
+
+        <button
+            onclick="logout()"
+            class="logout-button"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     DASHBOARD PROGRAM
+========================= -->
+
+<section class="admin-dashboard">
+
+
+    <div class="admin-title">
+
+        <p class="section-label">
+            KELOLA PROGRAM
+        </p>
+
+
+        <h1>
+            Program Layak Anak
+        </h1>
+
+
+        <p>
+            Tambahkan, ubah, atau hapus informasi
+            program yang ditampilkan pada website.
+        </p>
+
+    </div>
+
+
+
+    <!-- Tombol tambah -->
+
+    <div class="admin-action">
+
+        <button
+            onclick="showForm()"
+            class="add-button"
+        >
+            + Tambah Program
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         FORM PROGRAM
+    ========================= -->
+
+    <div
+        id="programForm"
+        class="admin-form"
+        style="display: none;"
+    >
+
+        <h2 id="formTitle">
+            Tambah Program
+        </h2>
+
+
+
+        <!-- Nama Program -->
+
+        <div class="form-group">
+
+            <label for="programTitle">
+                Nama Program
+            </label>
+
+            <input
+                type="text"
+                id="programTitle"
+                placeholder="Masukkan nama program"
+            >
+
+        </div>
+
+
+
+        <!-- Kategori -->
+
+        <div class="form-group">
+
+            <label for="programCategory">
+                Kategori
+            </label>
+
+            <input
+                type="text"
+                id="programCategory"
+                placeholder="Contoh: Perlindungan Anak"
+            >
+
+        </div>
+
+
+
+        <!-- Foto -->
+
+        <div class="form-group">
+
+            <label for="programImage">
+                Foto Program
+            </label>
+
+            <input
+                type="file"
+                id="programImage"
+                accept="image/*"
+            >
+
+            <small class="image-help">
+                Pilih foto dengan format JPG, JPEG, atau PNG.
+            </small>
+
+        </div>
+
+
+
+        <!-- Deskripsi -->
+
+        <div class="form-group">
+
+            <label for="programDescription">
+                Deskripsi Program
+            </label>
+
+            <textarea
+                id="programDescription"
+                rows="6"
+                placeholder="Masukkan deskripsi program"
+            ></textarea>
+
+        </div>
+
+
+
+        <!-- Tombol -->
+
+        <div class="form-actions">
+
+            <button
+                onclick="saveProgram()"
+                class="save-button"
+            >
+                Simpan
+            </button>
+
+
+            <button
+                onclick="cancelForm()"
+                class="cancel-button"
+            >
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         DAFTAR PROGRAM
+    ========================= -->
+
+    <div
+        id="programList"
+        class="admin-program-list"
+    ></div>
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Panel Administrator.
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+
+// =========================
+// CEK LOGIN ADMIN
+// =========================
+
+const isAdmin =
+    localStorage.getItem("adminLogin");
+
+
+if (isAdmin !== "true") {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =========================
+// DATA PROGRAM
+// =========================
+
+let programData =
+    JSON.parse(
+        localStorage.getItem("programData")
+    ) || [];
+
+
+
+let editIndex = -1;
+
+
+
+// =========================
+// DATA PROGRAM CONTOH
+// =========================
+
+const defaultProgramAdded =
+    localStorage.getItem(
+        "defaultProgramAdded"
+    );
+
+
+if (
+    defaultProgramAdded !== "true"
+) {
+
+    const defaultPrograms = [
+
+        {
+            title:
+                "Pendidikan dan Partisipasi Anak",
+
+            category:
+                "Pendidikan",
+
+            description:
+                "Program yang mendukung keterlibatan anak dalam memperoleh pendidikan yang layak serta memberikan ruang bagi anak untuk berpartisipasi dalam berbagai kegiatan.",
+
+            image:
+                ""
+        },
+
+
+        {
+            title:
+                "Perlindungan Anak",
+
+            category:
+                "Perlindungan",
+
+            description:
+                "Program yang bertujuan meningkatkan upaya perlindungan anak dari berbagai bentuk kekerasan, eksploitasi, diskriminasi, dan perlakuan yang dapat merugikan anak.",
+
+            image:
+                ""
+        },
+
+
+        {
+            title:
+                "Forum Anak",
+
+            category:
+                "Partisipasi Anak",
+
+            description:
+                "Program yang memberikan ruang bagi anak untuk menyampaikan aspirasi, berpartisipasi dalam kegiatan pembangunan, dan ikut mendukung penyelenggaraan Kabupaten/Kota Layak Anak.",
+
+            image:
+                ""
+        }
+
+    ];
+
+
+    programData =
+        defaultPrograms.concat(
+            programData
+        );
+
+
+    localStorage.setItem(
+        "programData",
+        JSON.stringify(programData)
+    );
+
+
+    localStorage.setItem(
+        "defaultProgramAdded",
+        "true"
+    );
+
+}
+
+
+
+// =========================
+// TAMPILKAN PROGRAM
+// =========================
+
+function displayPrograms() {
+
+
+    const programList =
+        document.getElementById(
+            "programList"
+        );
+
+
+    programList.innerHTML = "";
+
+
+
+    if (
+        programData.length === 0
+    ) {
+
+        programList.innerHTML = `
+
+            <div class="empty-news">
+
+                <h3>
+                    Belum ada program
+                </h3>
+
+                <p>
+                    Silakan tambahkan program baru
+                    menggunakan tombol di atas.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    programData.forEach(
+        function(program, index) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "admin-program-card";
+
+
+
+            card.innerHTML = `
+
+                <div class="admin-program-image">
+
+                    ${
+                        program.image
+
+                        ? `
+
+                            <img
+                                src="${program.image}"
+                                alt="${program.title}"
+                            >
+
+                        `
+
+                        : `
+
+                            <span>
+                                PROGRAM
+                            </span>
+
+                        `
+                    }
+
+                </div>
+
+
+
+                <div class="admin-program-content">
+
+                    <span class="admin-program-category">
+
+                        ${program.category}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${program.title}
+
+                    </h3>
+
+
+                    <p>
+
+                        ${program.description}
+
+                    </p>
+
+
+                    <div class="admin-program-actions">
+
+                        <button
+                            onclick="editProgram(${index})"
+                            class="edit-button"
+                        >
+                            Edit
+                        </button>
+
+
+                        <button
+                            onclick="deleteProgram(${index})"
+                            class="delete-button"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            programList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+// =========================
+// TAMPILKAN FORM
+// =========================
+
+function showForm() {
+
+
+    editIndex = -1;
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Tambah Program";
+
+
+    document.getElementById(
+        "programTitle"
+    ).value = "";
+
+
+    document.getElementById(
+        "programCategory"
+    ).value = "";
+
+
+    document.getElementById(
+        "programDescription"
+    ).value = "";
+
+
+    document.getElementById(
+        "programImage"
+    ).value = "";
+
+
+    document.getElementById(
+        "programForm"
+    ).style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+// =========================
+// BATAL
+// =========================
+
+function cancelForm() {
+
+
+    document.getElementById(
+        "programForm"
+    ).style.display =
+        "none";
+
+
+    editIndex = -1;
+
+}
+
+
+
+// =========================
+// SIMPAN PROGRAM
+// =========================
+
+async function saveProgram() {
+
+
+    const title =
+        document.getElementById(
+            "programTitle"
+        ).value.trim();
+
+
+    const category =
+        document.getElementById(
+            "programCategory"
+        ).value.trim();
+
+
+    const description =
+        document.getElementById(
+            "programDescription"
+        ).value.trim();
+
+
+    const imageInput =
+        document.getElementById(
+            "programImage"
+        );
+
+
+
+    if (
+        title === "" ||
+        category === "" ||
+        description === ""
+    ) {
+
+        alert(
+            "Nama program, kategori, dan deskripsi harus diisi."
+        );
+
+        return;
+
+    }
+
+
+
+    let image = "";
+
+
+
+    if (
+        imageInput.files.length > 0
+    ) {
+
+        const file =
+            imageInput.files[0];
+
+
+        if (
+            file.size >
+            2 * 1024 * 1024
+        ) {
+
+            alert(
+                "Ukuran foto terlalu besar. Maksimal 2 MB."
+            );
+
+            return;
+
+        }
+
+
+        image =
+            await convertImageToBase64(
+                file
+            );
+
+    }
+
+
+
+    const program = {
+
+        title:
+            title,
+
+        category:
+            category,
+
+        description:
+            description,
+
+        image:
+            image
+
+    };
+
+
+
+    // TAMBAH
+
+    if (
+        editIndex === -1
+    ) {
+
+        programData.push(
+            program
+        );
+
+    }
+
+
+    // EDIT
+
+    else {
+
+
+        if (
+            image === ""
+        ) {
+
+            program.image =
+                programData[
+                    editIndex
+                ].image || "";
+
+        }
+
+
+        programData[
+            editIndex
+        ] =
+            program;
+
+    }
+
+
+
+    localStorage.setItem(
+        "programData",
+        JSON.stringify(
+            programData
+        )
+    );
+
+
+    displayPrograms();
+
+
+    cancelForm();
+
+}
+
+
+
+// =========================
+// EDIT PROGRAM
+// =========================
+
+function editProgram(index) {
+
+
+    const program =
+        programData[index];
+
+
+    editIndex =
+        index;
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Edit Program";
+
+
+    document.getElementById(
+        "programTitle"
+    ).value =
+        program.title;
+
+
+    document.getElementById(
+        "programCategory"
+    ).value =
+        program.category;
+
+
+    document.getElementById(
+        "programDescription"
+    ).value =
+        program.description;
+
+
+    document.getElementById(
+        "programImage"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "programForm"
+    ).style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+// =========================
+// HAPUS PROGRAM
+// =========================
+
+function deleteProgram(index) {
+
+
+    const yakin =
+        confirm(
+            "Apakah kamu yakin ingin menghapus program ini?"
+        );
+
+
+    if (!yakin) {
+
+        return;
+
+    }
+
+
+    programData.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "programData",
+        JSON.stringify(
+            programData
+        )
+    );
+
+
+    displayPrograms();
+
+}
+
+
+
+// =========================
+// FOTO BASE64
+// =========================
+
+function convertImageToBase64(file) {
+
+
+    return new Promise(
+        function(resolve, reject) {
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function() {
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+
+            reader.onerror =
+                function(error) {
+
+                    reject(
+                        error
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+
+}
+
+
+
+// =========================
+// LOGOUT
+// =========================
+
+function logout() {
+
+
+    localStorage.removeItem(
+        "adminLogin"
+    );
+
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =========================
+// JALANKAN
+// =========================
+
+displayPrograms();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kontak | Layak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="main-header">
+
+    <div class="header-brand">
+
+        <div class="header-logos">
+
+            <img
+                src="img/logo-dinsos.png"
+                alt="Logo Dinas Sosial Kabupaten Magelang"
+                class="logo-dinsos"
+            >
+
+            <img
+                src="img/logo-kla.png"
+                alt="Logo Kabupaten Layak Anak"
+                class="logo-kla"
+            >
+
+        </div>
+
+        <div class="header-title">
+            <h2>KABUPATEN LAYAK ANAK</h2>
+            <span>MAGELANG</span>
+        </div>
+
+    </div>
+
+
+    <nav class="main-nav">
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a 
+            href="profil.html">
+            Profil
+        </a>
+
+        <a href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a 
+            href="program.html">
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a href="galeri.html">
+            Galeri
+        </a>
+
+         <a href="paparan.html">
+            Paparan
+        </a>
+
+        <a 
+            href="kontak.html"
+            class="active"
+            kontak
+        >
+            Kontak
+        </a>
+
+    </nav>
+
+
+</header>
+
+
+
+<!-- ==================================================
+     HEADER HALAMAN
+================================================== -->
+
+<section class="page-header">
+
+    <p class="section-label">
+        HUBUNGI KAMI
+    </p>
+
+    <h1>
+        Kontak
+    </h1>
+
+    <p>
+        Silakan menghubungi kami untuk mendapatkan
+        informasi mengenai program dan kegiatan
+        Layak Anak.
+    </p>
+
+</section>
+
+
+
+<!-- ==================================================
+     INFORMASI KONTAK
+================================================== -->
+
+<section class="contact-section">
+
+    <div class="contact-container">
+
+
+        <!-- =========================
+             INFORMASI
+        ========================= -->
+
+        <div class="contact-info">
+
+            <p class="section-label">
+                INFORMASI KONTAK
+            </p>
+
+            <h2>
+                Mari Terhubung
+            </h2>
+
+            <p>
+                Untuk informasi lebih lanjut mengenai
+                program, kegiatan, pemenuhan hak, dan
+                perlindungan anak, silakan menghubungi
+                kami melalui informasi yang tersedia.
+            </p>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    Alamat
+                </h3>
+
+                <p>
+                    Jl. Letnan Tukiyat No.40,
+                    Gunungan, Deyangan,
+                    Kec. Mertoyudan,
+                    Kabupaten Magelang,
+                    Jawa Tengah 56172
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    Email
+                </h3>
+
+                <p>
+                    info@contoh.go.id
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    Telepon
+                </h3>
+
+                <p>
+                    (0293)-788167
+                </p>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <h3>
+                    Jam Pelayanan
+                </h3>
+
+                <p>
+                    Senin - Jumat<br>
+                    08.00 - 16.00 WIB
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             FORM KONTAK
+        ================================================== -->
+
+        <div class="contact-form">
+
+            <h2>
+                Kirim Pesan
+            </h2>
+
+            <p class="contact-form-description">
+                Silakan isi formulir berikut.
+                Pesan yang dikirim akan diterima
+                oleh administrator.
+            </p>
+
+
+            <form
+                id="kontakForm"
+                onsubmit="kirimPesan(event)"
+            >
+
+
+                <!-- NAMA -->
+
+                <div class="form-group">
+
+                    <label for="nama">
+                        Nama
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        placeholder="Masukkan nama"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Masukkan email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PESAN -->
+
+                <div class="form-group">
+
+                    <label for="pesan">
+                        Pesan
+                    </label>
+
+                    <textarea
+                        id="pesan"
+                        rows="6"
+                        placeholder="Tuliskan pesan"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    id="submitButton"
+                >
+                    Kirim Pesan
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     NOTIFIKASI
+================================================== -->
+
+<div
+    id="notification"
+    class="contact-notification"
+>
+
+    <div
+        id="notificationIcon"
+        class="contact-notification-icon"
+    >
+        ✓
+    </div>
+
+
+    <div
+        id="notificationText"
+        class="contact-notification-text"
+    >
+        Pesan berhasil dikirim.
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <!-- TOTAL PENGUNJUNG -->
+        <div class="footer-visitors">
+
+            <h4>Total Pengunjung</h4>
+
+            <div class="visitor-number">
+                👥 <span id="totalVisitors">0</span>
+            </div>
+
+            <p>Pengunjung Website</p>
+
+            <div class="visitor-today">
+                📅 <span id="todayVisitors">0</span>
+                Pengunjung Hari Ini
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGASI -->
+        <div class="footer-links">
+
+            <h4>Navigasi</h4>
+
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="hak-anak.html">Hak Anak</a>
+            <a href="program.html">Program</a>
+
+        </div>
+
+
+        <!-- INFORMASI -->
+        <div class="footer-links">
+
+            <h4>Informasi</h4>
+
+            <a href="berita.html">Berita</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="paparan.html">Paparan</a>
+            <a href="kontak.html">Kontak</a>
+
+        </div>
+
+
+        <!-- IKUTI KAMI -->
+        <div class="footer-social">
+
+            <h4>Ikuti Kami</h4>
+
+            <div class="social-list">
+
+                <a
+                    href="https://www.instagram.com/dinsosppkbpppa_kabmagelang?stkn=MW5zY3E2NmZzeXVx"
+                    target="_blank"
+                >
+                    📷 Instagram
+                </a>
+
+                <a
+                    href="https://youtube.com/@dinsosppkbpppakabmagelang2140?si=sB44CmjzR5FT2_qU"
+                    target="_blank"
+                >
+                    ▶️ YouTube
+                </a>
+
+                <div
+                    class="phone-number"
+                    onclick="navigator.clipboard.writeText('0293788167')"
+                    title="Klik untuk menyalin nomor"
+                >
+                    ☎️ 0293788167
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Semua hak dilindungi.
+
+    </div>
+
+</footer>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT DATABASE
+================================================== -->
+
+<script>
+
+
+/* ==================================================
+   KONFIGURASI DATABASE
+================================================== */
+
+const DB_NAME =
+    "LayakAnakDB";
+
+
+/*
+ * Versi dinaikkan menjadi 2
+ * karena kita menambahkan store "kontak".
+ */
+
+const DB_VERSION =
+    2;
+
+
+const STORE_NAME =
+    "kontak";
+
+
+let db =
+    null;
+
+
+
+/* ==================================================
+   BUKA DATABASE
+================================================== */
+
+function bukaDatabase() {
+
+    return new Promise(
+        function(resolve, reject) {
+
+            const request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
+                );
+
+
+            /*
+             * Bagian ini dijalankan ketika:
+             *
+             * 1. Database baru dibuat
+             * 2. Versi database berubah
+             */
+
+            request.onupgradeneeded =
+                function(event) {
+
+                    const database =
+                        event.target.result;
+
+
+                    /*
+                     * Object store PAPARAN
+                     *
+                     * Jangan dibuat ulang kalau
+                     * sebelumnya sudah ada.
+                     */
+
+                    if (
+                        !database.objectStoreNames.contains(
+                            "paparan"
+                        )
+                    ) {
+
+                        database.createObjectStore(
+                            "paparan",
+                            {
+                                keyPath: "id",
+                                autoIncrement: true
+                            }
+                        );
+
+                    }
+
+
+                    /*
+                     * Object store KONTAK
+                     *
+                     * Digunakan untuk menyimpan
+                     * pesan dari masyarakat.
+                     */
+
+                    if (
+                        !database.objectStoreNames.contains(
+                            "kontak"
+                        )
+                    ) {
+
+                        database.createObjectStore(
+                            "kontak",
+                            {
+                                keyPath: "id",
+                                autoIncrement: true
+                            }
+                        );
+
+                    }
+
+                };
+
+
+            /*
+             * Database berhasil dibuka
+             */
+
+            request.onsuccess =
+                function(event) {
+
+                    db =
+                        event.target.result;
+
+
+                    console.log(
+                        "Database berhasil dibuka."
+                    );
+
+
+                    resolve(db);
+
+                };
+
+
+            /*
+             * Database gagal dibuka
+             */
+
+            request.onerror =
+                function(event) {
+
+                    console.error(
+                        "Database error:",
+                        event.target.error
+                    );
+
+
+                    reject(
+                        event.target.error
+                    );
+
+                };
+
+
+            /*
+             * Menangani perubahan versi
+             */
+
+            request.onblocked =
+                function() {
+
+                    console.warn(
+                        "Database sedang digunakan oleh halaman lain."
+                    );
+
+                };
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   KIRIM PESAN
+================================================== */
+
+function kirimPesan(event) {
+
+    /*
+     * Mencegah form melakukan reload
+     * halaman.
+     */
+
+    event.preventDefault();
+
+
+    /*
+     * Pastikan database sudah dibuka.
+     */
+
+    if (!db) {
+
+        tampilkanNotifikasi(
+            "Database belum siap. Silakan coba lagi."
+        );
+
+        return;
+
+    }
+
+
+
+    /* ==================================================
+       AMBIL DATA FORM
+    ================================================== */
+
+    const nama =
+        document
+            .getElementById("nama")
+            .value
+            .trim();
+
+
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+    const pesan =
+        document
+            .getElementById("pesan")
+            .value
+            .trim();
+
+
+
+    /* ==================================================
+       VALIDASI
+    ================================================== */
+
+    if (!nama) {
+
+        tampilkanNotifikasi(
+            "Nama belum diisi."
+        );
+
+        return;
+
+    }
+
+
+    if (!email) {
+
+        tampilkanNotifikasi(
+            "Email belum diisi."
+        );
+
+        return;
+
+    }
+
+
+    if (!pesan) {
+
+        tampilkanNotifikasi(
+            "Pesan belum diisi."
+        );
+
+        return;
+
+    }
+
+
+
+    /* ==================================================
+       DATA PESAN
+    ================================================== */
+
+    const dataPesan = {
+
+        nama:
+            nama,
+
+        email:
+            email,
+
+        pesan:
+            pesan,
+
+        tanggal:
+            new Date().toISOString(),
+
+        status:
+            "belum dibaca"
+
+    };
+
+
+
+    /* ==================================================
+       TRANSACTION
+    ================================================== */
+
+    let transaction;
+
+
+    try {
+
+        transaction =
+            db.transaction(
+                [STORE_NAME],
+                "readwrite"
+            );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Transaction error:",
+            error
+        );
+
+
+        tampilkanNotifikasi(
+            "Terjadi kesalahan pada database."
+        );
+
+
+        return;
+
+    }
+
+
+
+    const store =
+        transaction.objectStore(
+            STORE_NAME
+        );
+
+
+    const request =
+        store.add(
+            dataPesan
+        );
+
+
+
+    /* ==================================================
+       BERHASIL
+    ================================================== */
+
+    request.onsuccess =
+        function() {
+
+            console.log(
+                "Pesan berhasil disimpan:",
+                request.result
+            );
+
+
+            /*
+             * Bersihkan form
+             */
+
+            document
+                .getElementById(
+                    "kontakForm"
+                )
+                .reset();
+
+
+            /*
+             * Tampilkan notifikasi
+             */
+
+            tampilkanNotifikasi(
+                "Pesan berhasil dikirim kepada admin."
+            );
+
+        };
+
+
+
+    /* ==================================================
+       GAGAL
+    ================================================== */
+
+    request.onerror =
+        function(event) {
+
+            console.error(
+                "Gagal menyimpan pesan:",
+                event.target.error
+            );
+
+
+            tampilkanNotifikasi(
+                "Pesan gagal dikirim."
+            );
+
+        };
+
+
+
+    transaction.onerror =
+        function(event) {
+
+            console.error(
+                "Transaction gagal:",
+                event.target.error
+            );
+
+        };
+
+}
+
+
+
+/* ==================================================
+   NOTIFIKASI
+================================================== */
+
+let notificationTimer =
+    null;
+
+
+function tampilkanNotifikasi(
+    pesan
+) {
+
+    const notification =
+        document.getElementById(
+            "notification"
+        );
+
+
+    const notificationText =
+        document.getElementById(
+            "notificationText"
+        );
+
+
+    notificationText.textContent =
+        pesan;
+
+
+    notification.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        notificationTimer
+    );
+
+
+    notificationTimer =
+        setTimeout(
+            function() {
+
+                notification.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
+
+}
+
+
+
+/* ==================================================
+   INISIALISASI
+================================================== */
+
+async function initKontak() {
+
+    try {
+
+        await bukaDatabase();
+
+
+        console.log(
+            "Kontak siap digunakan."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Gagal membuka database:",
+            error
+        );
+
+
+        tampilkanNotifikasi(
+            "Terjadi kesalahan pada database."
+        );
+
+    }
+
+}
+
+
+initKontak();
+
+
+
+/* ==================================================
+   ESCAPE
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            const notification =
+                document.getElementById(
+                    "notification"
+                );
+
+
+            notification.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

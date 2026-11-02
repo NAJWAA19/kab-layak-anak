@@ -1,0 +1,5 @@
+# Keamanan folder upload: larang eksekusi script
+<FilesMatch "\.(php|phtml|phar|php\d+)$">
+    Require all denied
+</FilesMatch>
+php_flag engine off

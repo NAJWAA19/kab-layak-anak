@@ -1,0 +1,372 @@
+/* =========================================================================
+   FITUR RAMAH DISABILITAS
+   Widget aksesibilitas: Bacakan Halaman, Perbesar/Perkecil Teks,
+   Kontras Tinggi, Kontras Gelap, Navigasi Keyboard, Hentikan Animasi,
+   Reset Pengaturan.
+   Di-load PALING AKHIR di public_header.php (setelah modern.css) supaya
+   mode kontras bisa menimpa seluruh gaya halaman.
+   ========================================================================= */
+
+/* ------------------------------------------------------------------------
+   1. SKIP LINK (Lewati ke konten utama)
+   ------------------------------------------------------------------------ */
+.a11y-skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 20000;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #0f172a;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    box-shadow: 0 10px 26px rgba(4, 10, 30, .45);
+    transform: translateY(-150%);
+    transition: transform .2s ease;
+}
+.a11y-skip-link:focus-visible,
+.a11y-skip-link:focus {
+    transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------------
+   2. WIDGET (tombol melayang + panel)
+   ------------------------------------------------------------------------ */
+.a11y-widget {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    z-index: 10002;
+    font-family: 'Nunito', sans-serif;
+}
+
+.a11y-toggle {
+    width: 54px;
+    height: 54px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #fff;
+    background: linear-gradient(135deg, #38bdf8, #6366f1 55%, #a855f7);
+    box-shadow: 0 10px 26px rgba(99, 102, 241, .45);
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.a11y-toggle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(99, 102, 241, .55);
+}
+
+.a11y-panel {
+    position: absolute;
+    left: 0;
+    bottom: 68px;
+    width: 288px;
+    max-width: calc(100vw - 44px);
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(16, 23, 42, .94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .16);
+    box-shadow: 0 24px 60px rgba(4, 10, 30, .4);
+    color: #e8eefb;
+}
+.a11y-panel[hidden] {
+    display: none;
+}
+
+.a11y-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 4px 0;
+    margin-bottom: 10px;
+}
+.a11y-panel-head strong {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .4px;
+    color: #fff;
+}
+.a11y-close {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #a9bfe4;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease, color .2s ease;
+}
+.a11y-close:hover {
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
+}
+
+.a11y-actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.a11y-actions li {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+.a11y-actions button {
+    width: 100%;
+    min-height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    padding: 11px 6px 9px;
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .06);
+    color: #dbe7ff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.a11y-actions button:hover {
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+}
+.a11y-actions button i {
+    font-size: 17px;
+    color: #93c5fd;
+    transition: color .2s ease;
+}
+.a11y-actions button:hover i {
+    color: #fff;
+}
+.a11y-actions button[aria-pressed="true"] {
+    background: linear-gradient(135deg, rgba(56, 189, 248, .22), rgba(168, 85, 247, .22));
+    border-color: rgba(56, 189, 248, .65);
+    color: #fff;
+}
+.a11y-actions button[aria-pressed="true"] i {
+    color: #38bdf8;
+}
+.a11y-actions button.is-reading {
+    border-color: rgba(244, 63, 94, .75);
+    background: linear-gradient(135deg, rgba(244, 63, 94, .25), rgba(236, 72, 153, .22));
+}
+.a11y-actions button.is-reading i {
+    color: #fb7185;
+}
+.a11y-level {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .14);
+    font-size: 10px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.6;
+    color: #e8eefb;
+}
+.a11y-reset-btn i {
+    color: #fbbf24 !important;
+}
+
+@media (max-width: 600px) {
+    .a11y-widget {
+        left: 16px;
+        bottom: 16px;
+    }
+    .a11y-toggle {
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+        font-size: 20px;
+    }
+    .a11y-panel {
+        bottom: 62px;
+        width: 264px;
+    }
+}
+
+/* ------------------------------------------------------------------------
+   3. NAVIGASI KEYBOARD — tampilkan ring fokus yang jelas
+   ------------------------------------------------------------------------ */
+html.a11y-kb :focus {
+    outline: 3px solid #1976d2 !important;
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* ------------------------------------------------------------------------
+   4. HENTIKAN ANIMASI
+   ------------------------------------------------------------------------ */
+html.a11y-noanim,
+html.a11y-noanim *,
+html.a11y-noanim *::before,
+html.a11y-noanim *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+html.a11y-noanim .reveal,
+html.a11y-noanim .footer-marquee-inner,
+html.a11y-noanim .hero-bg-track {
+    transform: none !important;
+}
+html.a11y-noanim .reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ------------------------------------------------------------------------
+   5. KONTRAS TINGGI (hitam + kuning)
+   ------------------------------------------------------------------------ */
+html.a11y-hc body {
+    background: #000 !important;
+    color: #fff !important;
+}
+html.a11y-hc body *,
+html.a11y-hc body *::before,
+html.a11y-hc body *::after {
+    background-image: none !important;
+    background-color: #000 !important;
+    border-color: rgba(255, 255, 255, .45) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+html.a11y-hc body :where(h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote, figcaption, label, small, strong, b, em, span, dt, dd, address, caption) {
+    color: #fff !important;
+}
+html.a11y-hc a {
+    color: #ffdf3d !important;
+    text-decoration: underline !important;
+}
+html.a11y-hc a:hover {
+    color: #fff !important;
+}
+html.a11y-hc input,
+html.a11y-hc textarea,
+html.a11y-hc select {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    border-radius: 6px !important;
+}
+html.a11y-hc :focus {
+    outline: 3px solid #ffdf3d !important;
+    outline-offset: 2px !important;
+}
+/* kembalikan tampilan widget agar tetap terbaca & tetap "tertonjol" */
+html.a11y-hc .a11y-widget .a11y-toggle {
+    background: linear-gradient(135deg, #38bdf8, #a855f7) !important;
+    border: 2px solid #fff !important;
+}
+html.a11y-hc .a11y-widget .a11y-panel {
+    background-color: #0b1526 !important;
+    border: 2px solid #fff !important;
+}
+html.a11y-hc .a11y-actions button {
+    background-color: #0b1526 !important;
+    border-color: rgba(255, 255, 255, .6) !important;
+}
+html.a11y-hc .a11y-actions button[aria-pressed="true"] {
+    background-color: #1e293b !important;
+    border-color: #ffdf3d !important;
+}
+html.a11y-hc .a11y-skip-link {
+    background-color: #ffdf3d !important;
+    color: #000 !important;
+}
+
+/* ------------------------------------------------------------------------
+   6. KONTRAS GELAP (mode gelap, teks terang)
+   ------------------------------------------------------------------------ */
+html.a11y-dc body {
+    background: #0d1424 !important;
+    color: #e8eefb !important;
+}
+html.a11y-dc body *,
+html.a11y-dc body *::before,
+html.a11y-dc body *::after {
+    background-image: none !important;
+    background-color: #101828 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+html.a11y-dc body :where(h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote, figcaption, label, small, strong, b, em, span, dt, dd, address, caption) {
+    color: #e8eefb !important;
+}
+html.a11y-dc a {
+    color: #7fb3ff !important;
+}
+html.a11y-dc input,
+html.a11y-dc textarea,
+html.a11y-dc select {
+    background-color: #0d1526 !important;
+    color: #e8eefb !important;
+    border: 1px solid #2c3a57 !important;
+    border-radius: 8px !important;
+}
+/* kartu/panel konten sedikit lebih terang agar tetap terbedakan */
+html.a11y-dc .why-card,
+html.a11y-dc .program-card,
+html.a11y-dc .right-card,
+html.a11y-dc .gallery-public-card,
+html.a11y-dc .paparan-card,
+html.a11y-dc .page-art,
+html.a11y-dc .purpose-card,
+html.a11y-dc .contact-info,
+html.a11y-dc .contact-form,
+html.a11y-dc .detail-card,
+html.a11y-dc .news-card,
+html.a11y-dc .contact-item {
+    background-color: #1a2336 !important;
+    border: 1px solid #2c3a57 !important;
+}
+html.a11y-dc .main-nav a.active {
+    background-color: #1a2336 !important;
+    color: #7fb3ff !important;
+}
+html.a11y-dc :focus {
+    outline: 3px solid #38bdf8 !important;
+    outline-offset: 2px !important;
+}
+/* kembalikan tampilan widget */
+html.a11y-dc .a11y-widget .a11y-toggle {
+    background: linear-gradient(135deg, #38bdf8, #6366f1 55%, #a855f7) !important;
+}
+html.a11y-dc .a11y-widget .a11y-panel {
+    background-color: #0b1526 !important;
+}
+html.a11y-dc .a11y-actions button {
+    background-color: #1a2336 !important;
+    border-color: #2c3a57 !important;
+}
+html.a11y-dc .a11y-actions button[aria-pressed="true"] {
+    background-color: #243048 !important;
+    border-color: #38bdf8 !important;
+}
+html.a11y-dc .a11y-skip-link {
+    background-color: #38bdf8 !important;
+    color: #0d1424 !important;
+}

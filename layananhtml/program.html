@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Program Layak Anak</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="main-header">
+
+    <div class="header-brand">
+
+        <div class="header-logos">
+
+            <img
+                src="img/logo-dinsos.png"
+                alt="Logo Dinas Sosial Kabupaten Magelang"
+                class="logo-dinsos"
+            >
+
+            <img
+                src="img/logo-kla.png"
+                alt="Logo Kabupaten Layak Anak"
+                class="logo-kla"
+            >
+
+        </div>
+
+        <div class="header-title">
+            <h2>KABUPATEN LAYAK ANAK</h2>
+            <span>MAGELANG</span>
+        </div>
+
+    </div>
+
+
+    <nav class="main-nav">
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a 
+            href="profil.html">
+            Profil
+        </a>
+
+        <a href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a 
+            href="program.html"
+            class="active"
+            program
+        >
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a href="galeri.html">
+            Galeri
+        </a>
+
+         <a href="paparan.html">
+            Paparan
+        </a>
+
+        <a href="kontak.html">
+            Kontak
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HEADER HALAMAN
+========================= -->
+
+<section class="page-header">
+
+    <p class="section-label">
+        PROGRAM DAN KEGIATAN
+    </p>
+
+
+    <h1>
+        Program Layak Anak
+    </h1>
+
+
+    <p>
+        Berbagai program dan kegiatan yang mendukung
+        pemenuhan hak serta perlindungan anak.
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     PROGRAM
+========================= -->
+
+<section class="program">
+
+
+    <div
+        class="program-container"
+        id="programContainer"
+    >
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <!-- TOTAL PENGUNJUNG -->
+        <div class="footer-visitors">
+
+            <h4>Total Pengunjung</h4>
+
+            <div class="visitor-number">
+                👥 <span id="totalVisitors">0</span>
+            </div>
+
+            <p>Pengunjung Website</p>
+
+            <div class="visitor-today">
+                📅 <span id="todayVisitors">0</span>
+                Pengunjung Hari Ini
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGASI -->
+        <div class="footer-links">
+
+            <h4>Navigasi</h4>
+
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="hak-anak.html">Hak Anak</a>
+            <a href="program.html">Program</a>
+
+        </div>
+
+
+        <!-- INFORMASI -->
+        <div class="footer-links">
+
+            <h4>Informasi</h4>
+
+            <a href="berita.html">Berita</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="paparan.html">Paparan</a>
+            <a href="kontak.html">Kontak</a>
+
+        </div>
+
+
+        <!-- IKUTI KAMI -->
+        <div class="footer-social">
+
+            <h4>Ikuti Kami</h4>
+
+            <div class="social-list">
+
+                <a
+                    href="https://www.instagram.com/dinsosppkbpppa_kabmagelang?stkn=MW5zY3E2NmZzeXVx"
+                    target="_blank"
+                >
+                    📷 Instagram
+                </a>
+
+                <a
+                    href="https://youtube.com/@dinsosppkbpppakabmagelang2140?si=sB44CmjzR5FT2_qU"
+                    target="_blank"
+                >
+                    ▶️ YouTube
+                </a>
+
+                <div
+                    class="phone-number"
+                    onclick="navigator.clipboard.writeText('0293788167')"
+                    title="Klik untuk menyalin nomor"
+                >
+                    ☎️ 0293788167
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Semua hak dilindungi.
+
+    </div>
+
+</footer>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+// =========================
+// AMBIL DATA PROGRAM
+// =========================
+
+let programData =
+    JSON.parse(
+        localStorage.getItem("programData")
+    ) || [];
+
+
+
+const programContainer =
+    document.getElementById(
+        "programContainer"
+    );
+
+
+
+// =========================
+// TAMPILKAN PROGRAM
+// =========================
+
+function displayPrograms() {
+
+
+    programContainer.innerHTML = "";
+
+
+    /*
+        Jika belum ada program
+    */
+
+    if (
+        programData.length === 0
+    ) {
+
+        programContainer.innerHTML = `
+
+            <div class="empty-public-news">
+
+                <h3>
+                    Belum Ada Program
+                </h3>
+
+                <p>
+                    Informasi program akan
+                    ditampilkan di sini.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    /*
+        Tampilkan semua program
+    */
+
+    programData.forEach(
+        function(program, index) {
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "program-card";
+
+
+
+            card.innerHTML = `
+
+                <div class="program-image">
+
+                    ${
+                        program.image
+
+                        ? `
+
+                            <img
+                                src="${program.image}"
+                                alt="${program.title}"
+                            >
+
+                        `
+
+                        : `
+
+                            <span>
+                                PROGRAM
+                            </span>
+
+                        `
+                    }
+
+                </div>
+
+
+
+                <div class="program-content">
+
+                    <span>
+
+                        ${program.category}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${program.title}
+
+                    </h3>
+
+
+                    <p>
+
+                        ${program.description}
+
+                    </p>
+
+
+                    <a
+                        href="detail-program.html?id=${index}"
+                    >
+
+                        Selengkapnya →
+
+                    </a>
+
+                </div>
+
+            `;
+
+
+            programContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+// =========================
+// JALANKAN PROGRAM
+// =========================
+
+displayPrograms();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kelola Galeri | Layak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- =========================
+     HEADER ADMIN
+========================= -->
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+
+        <h2>
+            LAYAK ANAK
+        </h2>
+
+        <span>
+            ADMIN PANEL
+        </span>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span>
+            Admin
+        </span>
+
+        <button
+            onclick="logout()"
+            class="logout-button"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     KONTEN ADMIN
+========================= -->
+
+<section class="admin-dashboard">
+
+
+    <!-- JUDUL -->
+
+    <div class="admin-title">
+
+        <p class="section-label">
+            KELOLA GALERI
+        </p>
+
+        <h1>
+            Galeri Kegiatan
+        </h1>
+
+        <p>
+            Tambahkan, ubah, dan hapus foto
+            dokumentasi kegiatan Layak Anak.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         TOOLBAR
+    ========================== -->
+
+    <div class="gallery-admin-toolbar">
+
+        <button
+            onclick="openAddModal()"
+            class="add-button"
+        >
+            + Tambah Foto
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         DAFTAR GALERI
+    ========================== -->
+
+    <div
+        id="galleryContainer"
+        class="admin-gallery-container"
+    >
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     MODAL GALERI
+========================= -->
+
+<div
+    id="galleryModal"
+    class="admin-modal"
+>
+
+
+    <div class="admin-modal-content">
+
+
+        <!-- HEADER MODAL -->
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <p class="section-label">
+                    GALERI
+                </p>
+
+                <h2 id="modalTitle">
+                    Tambah Foto
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeGalleryModal()"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             FORM
+        ========================== -->
+
+        <form id="galleryForm">
+
+
+            <!-- JUDUL -->
+
+            <div class="form-group">
+
+                <label for="galleryTitle">
+                    Judul / Keterangan Foto
+                </label>
+
+                <input
+                    type="text"
+                    id="galleryTitle"
+                    placeholder="Contoh: Kegiatan Forum Anak"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- FOTO -->
+
+            <div class="form-group">
+
+                <label for="photoFile">
+                    Foto
+                </label>
+
+                <input
+                    type="file"
+                    id="photoFile"
+                    accept="image/*"
+                >
+
+                <p class="form-help">
+                    Pilih foto dari komputer dengan
+                    format JPG, JPEG, atau PNG.
+                </p>
+
+            </div>
+
+
+
+            <!-- PREVIEW -->
+
+            <div
+                id="photoPreview"
+                class="photo-preview"
+            >
+
+                <span>
+                    Preview foto akan muncul di sini
+                </span>
+
+            </div>
+
+
+
+            <!-- TOMBOL -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    onclick="closeGalleryModal()"
+                    class="cancel-button"
+                >
+                    Batal
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Simpan
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Panel Administrator.
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+
+// =====================================================
+// CEK LOGIN ADMIN
+// =====================================================
+
+const isAdmin =
+    localStorage.getItem(
+        "adminLogin"
+    );
+
+
+if (isAdmin !== "true") {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =====================================================
+// DATA GALERI
+// =====================================================
+
+let galleryData =
+    JSON.parse(
+        localStorage.getItem(
+            "galleryData"
+        )
+    ) || [];
+
+
+let editingIndex = null;
+
+let selectedImage = "";
+
+
+
+// =====================================================
+// ELEMENT
+// =====================================================
+
+const galleryContainer =
+    document.getElementById(
+        "galleryContainer"
+    );
+
+
+const galleryModal =
+    document.getElementById(
+        "galleryModal"
+    );
+
+
+const galleryForm =
+    document.getElementById(
+        "galleryForm"
+    );
+
+
+const galleryTitle =
+    document.getElementById(
+        "galleryTitle"
+    );
+
+
+const photoFile =
+    document.getElementById(
+        "photoFile"
+    );
+
+
+const photoPreview =
+    document.getElementById(
+        "photoPreview"
+    );
+
+
+
+// =====================================================
+// PILIH FOTO
+// =====================================================
+
+photoFile.addEventListener(
+    "change",
+    function () {
+
+        const file =
+            this.files[0];
+
+
+        if (!file) {
+
+            selectedImage = "";
+
+            photoPreview.innerHTML = `
+
+                <span>
+                    Preview foto akan muncul di sini
+                </span>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        // Pastikan file adalah gambar
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            alert(
+                "File yang dipilih harus berupa gambar."
+            );
+
+            this.value = "";
+
+            selectedImage = "";
+
+            photoPreview.innerHTML = `
+
+                <span>
+                    Preview foto akan muncul di sini
+                </span>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        // Membaca foto
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function (event) {
+
+                selectedImage =
+                    event.target.result;
+
+
+                photoPreview.innerHTML = `
+
+                    <img
+                        src="${selectedImage}"
+                        alt="Preview Foto"
+                    >
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+);
+
+
+
+// =====================================================
+// TAMPILKAN GALERI
+// =====================================================
+
+function displayGallery() {
+
+    galleryContainer.innerHTML = "";
+
+
+    // Kalau belum ada foto
+
+    if (
+        galleryData.length === 0
+    ) {
+
+        galleryContainer.innerHTML = `
+
+            <div class="empty-gallery">
+
+                <div class="empty-gallery-icon">
+                    🖼️
+                </div>
+
+                <h3>
+                    Belum Ada Foto
+                </h3>
+
+                <p>
+                    Belum ada dokumentasi yang
+                    ditambahkan ke galeri.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // Tampilkan semua foto
+
+    galleryData.forEach(
+        function (item, index) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "admin-gallery-card";
+
+
+            card.innerHTML = `
+
+                <div class="admin-gallery-image">
+
+                    <img
+                        src="${item.image}"
+                        alt="${escapeHTML(item.title)}"
+                    >
+
+                </div>
+
+
+                <div class="admin-gallery-content">
+
+                    <h3>
+                        ${escapeHTML(item.title)}
+                    </h3>
+
+
+                    <div class="admin-gallery-actions">
+
+                        <button
+                            type="button"
+                            onclick="editGallery(${index})"
+                            class="edit-button"
+                        >
+                            Edit
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onclick="deleteGallery(${index})"
+                            class="delete-button"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            galleryContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// BUKA MODAL TAMBAH
+// =====================================================
+
+function openAddModal() {
+
+    editingIndex = null;
+
+    selectedImage = "";
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Tambah Foto";
+
+
+    galleryForm.reset();
+
+
+    photoPreview.innerHTML = `
+
+        <span>
+            Preview foto akan muncul di sini
+        </span>
+
+    `;
+
+
+    galleryModal.classList.add(
+        "show"
+    );
+
+}
+
+
+
+// =====================================================
+// EDIT FOTO
+// =====================================================
+
+function editGallery(index) {
+
+    const item =
+        galleryData[index];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    editingIndex =
+        index;
+
+
+    selectedImage =
+        item.image;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Foto";
+
+
+    galleryTitle.value =
+        item.title;
+
+
+    photoFile.value =
+        "";
+
+
+    photoPreview.innerHTML = `
+
+        <img
+            src="${item.image}"
+            alt="${escapeHTML(item.title)}"
+        >
+
+    `;
+
+
+    galleryModal.classList.add(
+        "show"
+    );
+
+}
+
+
+
+// =====================================================
+// SIMPAN DATA
+// =====================================================
+
+galleryForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+
+        const title =
+            galleryTitle.value.trim();
+
+
+        if (!title) {
+
+            alert(
+                "Judul atau keterangan foto wajib diisi."
+            );
+
+            return;
+
+        }
+
+
+
+        // =========================
+        // TAMBAH FOTO BARU
+        // =========================
+
+        if (
+            editingIndex === null
+        ) {
+
+            if (!selectedImage) {
+
+                alert(
+                    "Silakan pilih foto terlebih dahulu."
+                );
+
+                return;
+
+            }
+
+
+            const newGallery = {
+
+                title:
+                    title,
+
+                image:
+                    selectedImage
+
+            };
+
+
+            galleryData.push(
+                newGallery
+            );
+
+        }
+
+
+
+        // =========================
+        // EDIT FOTO
+        // =========================
+
+        else {
+
+            galleryData[
+                editingIndex
+            ].title =
+                title;
+
+
+            // Kalau admin memilih foto baru
+
+            if (
+                photoFile.files.length > 0
+                &&
+                selectedImage
+            ) {
+
+                galleryData[
+                    editingIndex
+                ].image =
+                    selectedImage;
+
+            }
+
+        }
+
+
+
+        // =========================
+        // SIMPAN KE LOCAL STORAGE
+        // =========================
+
+        localStorage.setItem(
+            "galleryData",
+            JSON.stringify(
+                galleryData
+            )
+        );
+
+
+
+        // =========================
+        // TUTUP MODAL
+        // =========================
+
+        closeGalleryModal();
+
+
+
+        // =========================
+        // TAMPILKAN ULANG GALERI
+        // =========================
+
+        displayGallery();
+
+    }
+);
+
+
+
+// =====================================================
+// HAPUS FOTO
+// =====================================================
+
+function deleteGallery(index) {
+
+    if (
+        !galleryData[index]
+    ) {
+
+        return;
+
+    }
+
+
+
+    // Langsung hapus tanpa confirm
+
+    galleryData.splice(
+        index,
+        1
+    );
+
+
+
+    // Simpan perubahan
+
+    localStorage.setItem(
+        "galleryData",
+        JSON.stringify(
+            galleryData
+        )
+    );
+
+
+
+    // Tampilkan ulang
+
+    displayGallery();
+
+}
+
+
+
+// =====================================================
+// TUTUP MODAL
+// =====================================================
+
+function closeGalleryModal() {
+
+    galleryModal.classList.remove(
+        "show"
+    );
+
+
+    editingIndex = null;
+
+    selectedImage = "";
+
+}
+
+
+
+// =====================================================
+// LOGOUT
+// =====================================================
+
+function logout() {
+
+    localStorage.removeItem(
+        "adminLogin"
+    );
+
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+// =====================================================
+// JALANKAN
+// =====================================================
+
+displayGallery();
+
+
+</script>
+
+
+</body>
+
+</html>

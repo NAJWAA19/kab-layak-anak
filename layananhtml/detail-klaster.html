@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Detail Klaster Hak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <div class="logo">
+        <h2>LAYAK ANAK</h2>
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a href="profil.html">
+            Profil
+        </a>
+
+        <a href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a href="program.html">
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a href="galeri.html">
+            Galeri
+        </a>
+
+        <a href="kontak.html">
+            Kontak
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     DETAIL KLASTER
+========================= -->
+
+<section class="cluster-detail">
+
+
+    <div class="cluster-detail-container">
+
+
+        <a
+            href="hak-anak.html"
+            class="back-link"
+        >
+            ← Kembali ke Hak Anak
+        </a>
+
+
+
+        <div
+            id="clusterContent"
+            class="cluster-detail-content"
+        >
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div class="footer-about">
+
+            <h2>
+                LAYAK ANAK
+            </h2>
+
+            <p>
+                Portal informasi mengenai program,
+                kegiatan, pemenuhan hak, dan
+                perlindungan anak.
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-menu">
+
+            <h3>
+                Menu
+            </h3>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="hak-anak.html">
+                Hak Anak
+            </a>
+
+            <a href="program.html">
+                Program
+            </a>
+
+            <a href="berita.html">
+                Berita
+            </a>
+
+            <a href="galeri.html">
+                Galeri
+            </a>
+
+             <a href="paparan.html">
+                Paparan
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-contact">
+
+            <h3>
+                Kontak
+            </h3>
+
+            <p>
+                Dinas Sosial
+            </p>
+
+            <p>
+                Kabupaten/Kota
+            </p>
+
+            <p>
+                Email: info@contoh.go.id
+            </p>
+
+            <p>
+                Telepon: -
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Website Layak Anak.
+            Semua hak dilindungi.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+
+// =========================
+// DATA KLASTER
+// =========================
+
+// Ambil data dari localStorage
+let clusterData =
+    JSON.parse(
+        localStorage.getItem("clusterData")
+    );
+
+
+// Jika belum ada data,
+// gunakan data awal
+
+if (
+    !clusterData ||
+    !Array.isArray(clusterData)
+) {
+
+    clusterData = [
+
+        {
+            id: 1,
+            number: "01",
+            icon: "🪪",
+            title: "Hak Sipil dan Kebebasan",
+            description:
+                "Pemenuhan hak anak atas identitas, pencatatan kelahiran, informasi, serta kesempatan untuk menyampaikan pendapat dan berpartisipasi.",
+            points: [
+                "Hak memperoleh identitas",
+                "Hak memperoleh akta kelahiran",
+                "Hak memperoleh informasi",
+                "Hak menyampaikan pendapat",
+                "Hak untuk berpartisipasi"
+            ]
+        },
+
+        {
+            id: 2,
+            number: "02",
+            icon: "🏠",
+            title: "Lingkungan Keluarga dan Pengasuhan",
+            description:
+                "Dukungan terhadap keluarga dan pengasuhan yang aman agar anak dapat tumbuh dan berkembang dalam lingkungan yang mendukung.",
+            points: [
+                "Pengasuhan yang layak",
+                "Lingkungan keluarga yang aman",
+                "Dukungan bagi keluarga",
+                "Pencegahan penelantaran anak",
+                "Pemenuhan kebutuhan anak dalam keluarga"
+            ]
+        },
+
+        {
+            id: 3,
+            number: "03",
+            icon: "❤️",
+            title: "Kesehatan Dasar dan Kesejahteraan",
+            description:
+                "Pemenuhan kebutuhan kesehatan, gizi, sanitasi, serta kesejahteraan anak dalam kehidupan sehari-hari.",
+            points: [
+                "Pelayanan kesehatan anak",
+                "Pemenuhan kebutuhan gizi",
+                "Akses terhadap air bersih",
+                "Sanitasi yang layak",
+                "Pemenuhan kesejahteraan anak"
+            ]
+        },
+
+        {
+            id: 4,
+            number: "04",
+            icon: "🎓",
+            title: "Pendidikan, Waktu Luang dan Budaya",
+            description:
+                "Dukungan terhadap pendidikan, kegiatan bermain, waktu luang, kreativitas, olahraga, dan pengembangan budaya anak.",
+            points: [
+                "Akses pendidikan",
+                "Lingkungan pendidikan yang aman",
+                "Kesempatan bermain",
+                "Kegiatan olahraga dan kreativitas",
+                "Pengembangan minat dan bakat"
+            ]
+        },
+
+        {
+            id: 5,
+            number: "05",
+            icon: "🛡️",
+            title: "Perlindungan Khusus",
+            description:
+                "Perlindungan dan pelayanan bagi anak yang berada dalam kondisi tertentu dan membutuhkan perlindungan khusus.",
+            points: [
+                "Perlindungan dari kekerasan",
+                "Perlindungan dari eksploitasi",
+                "Perlindungan dari diskriminasi",
+                "Perlindungan bagi anak dalam kondisi khusus",
+                "Pelayanan bagi anak yang membutuhkan perlindungan"
+            ]
+        }
+
+    ];
+
+
+    // Simpan data awal
+    localStorage.setItem(
+        "clusterData",
+        JSON.stringify(clusterData)
+    );
+    
+};
+
+
+// =========================
+// AMBIL ID KLASTER
+// =========================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const clusterId =
+    urlParams.get("id");
+
+
+
+const cluster =
+    clusterData.find(
+        function(item) {
+
+            return item.id ==
+                Number(clusterId);
+
+        }
+    );
+
+
+
+const clusterContent =
+    document.getElementById(
+        "clusterContent"
+    );
+
+
+
+// =========================
+// TAMPILKAN DATA
+// =========================
+
+if (!cluster) {
+
+    clusterContent.innerHTML = `
+
+        <div class="cluster-not-found">
+
+            <h1>
+                Klaster Tidak Ditemukan
+            </h1>
+
+            <p>
+                Informasi klaster yang dipilih
+                belum tersedia.
+            </p>
+
+            <a
+                href="hak-anak.html"
+                class="back-button"
+            >
+                Kembali
+            </a>
+
+        </div>
+
+    `;
+
+} else {
+
+    clusterContent.innerHTML = `
+
+        <div class="cluster-detail-header">
+
+            <div class="cluster-detail-icon">
+
+                ${cluster.icon}
+
+            </div>
+
+
+            <div>
+
+                <span class="cluster-detail-number">
+
+                    KLASTER ${cluster.number}
+
+                </span>
+
+
+                <h1>
+
+                    ${cluster.title}
+
+                </h1>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="cluster-description">
+
+            <h2>
+                Tentang Klaster
+            </h2>
+
+            <p>
+                ${cluster.description}
+            </p>
+
+        </div>
+
+
+
+        <div class="cluster-points">
+
+            <h2>
+                Ruang Lingkup
+            </h2>
+
+
+            <div class="cluster-point-list">
+
+                ${
+
+                    cluster.points.map(
+                        function(point) {
+
+                            return `
+
+                                <div class="cluster-point">
+
+                                    <span>
+                                        ✓
+                                    </span>
+
+                                    <p>
+                                        ${point}
+                                    </p>
+
+                                </div>
+
+                            `;
+
+                        }
+                    ).join("")
+
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

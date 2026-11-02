@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detail Berita | Layak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- Navbar -->
+
+<header>
+
+    <div class="logo">
+
+        <h2>LAYAK ANAK</h2>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">Beranda</a>
+
+        <a href="profil.html">Profil</a>
+
+        <a href="hak-anak.html">Hak Anak</a>
+
+        <a href="program.html">Program</a>
+
+        <a href="berita.html">Berita</a>
+
+        <a href="galeri.html">Galeri</a>
+
+        <a href="kontak.html">Kontak</a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- Detail Berita -->
+
+<section class="detail-news">
+
+
+    <div class="detail-news-container">
+
+
+        <a
+            href="berita.html"
+            class="back-news"
+        >
+            ← Kembali ke Berita
+        </a>
+
+
+        <div id="detailNews">
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- Footer -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div class="footer-about">
+
+            <h2>
+                LAYAK ANAK
+            </h2>
+
+            <p>
+                Portal informasi mengenai program,
+                kegiatan, pemenuhan hak, dan
+                perlindungan anak.
+            </p>
+
+        </div>
+
+
+        <div class="footer-menu">
+
+            <h3>
+                Menu
+            </h3>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="hak-anak.html">
+                Hak Anak
+            </a>
+
+            <a href="program.html">
+                Program
+            </a>
+
+            <a href="berita.html">
+                Berita
+            </a>
+
+        </div>
+
+
+        <div class="footer-contact">
+
+            <h3>
+                Kontak
+            </h3>
+
+            <p>
+                Dinas Sosial
+            </p>
+
+            <p>
+                Dinas Sosial PPKBPPPA Kabupaten Magelang
+            </p>
+
+            <p>
+                Email: info@contoh.go.id
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Website Layak Anak.
+            Semua hak dilindungi.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    const detailNews =
+        document.getElementById("detailNews");
+
+
+    const newsData =
+        JSON.parse(
+            localStorage.getItem("newsData")
+        ) || [];
+
+
+    /*
+       Ambil nomor berita
+       dari URL
+    */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const newsIndex =
+        parseInt(
+            urlParams.get("id")
+        );
+
+
+    /*
+       Cek apakah berita tersedia
+    */
+
+    if (
+        isNaN(newsIndex) ||
+        !newsData[newsIndex]
+    ) {
+
+        detailNews.innerHTML = `
+
+            <div class="empty-detail">
+
+                <h2>
+                    Berita Tidak Ditemukan
+                </h2>
+
+                <p>
+                    Berita yang kamu cari
+                    tidak tersedia.
+                </p>
+
+                <a href="berita.html">
+                    Kembali ke Berita
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+
+    else {
+
+        const news =
+            newsData[newsIndex];
+
+
+        detailNews.innerHTML = `
+
+            <article class="detail-article">
+
+
+                <div class="detail-image">
+
+                    ${
+                        news.image
+                        ? `<img
+                            src="${news.image}"
+                            alt="${news.title}"
+                          >`
+                        : `<span>
+                            LAYAK ANAK
+                           </span>`
+                    }
+
+                </div>
+
+
+                <div class="detail-content">
+
+
+                    <span class="detail-date">
+
+                        ${formatDate(news.date)}
+
+                    </span>
+
+
+                    <h1>
+
+                        ${news.title}
+
+                    </h1>
+
+
+                    <div class="detail-text">
+
+                        <p>
+
+                            ${news.description}
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+        `;
+
+    }
+
+
+
+    function formatDate(dateString) {
+
+        const date =
+            new Date(dateString);
+
+
+        return date.toLocaleDateString(
+            "id-ID",
+            {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

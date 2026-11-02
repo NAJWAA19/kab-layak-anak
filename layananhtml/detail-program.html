@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Detail Program - Layak Anak</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        <h2>
+            LAYAK ANAK
+        </h2>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a href="profil.html">
+            Profil
+        </a>
+
+        <a href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a href="program.html">
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a href="galeri.html">
+            Galeri
+        </a>
+
+        <a href="kontak.html">
+            Kontak
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     DETAIL PROGRAM
+========================= -->
+
+<section class="program-detail">
+
+    <div
+        class="program-detail-container"
+        id="programDetail"
+    >
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div class="footer-about">
+
+            <h2>
+                LAYAK ANAK
+            </h2>
+
+            <p>
+                Portal informasi mengenai program,
+                kegiatan, pemenuhan hak, dan
+                perlindungan anak.
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-menu">
+
+            <h3>
+                Menu
+            </h3>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="hak-anak.html">
+                Hak Anak
+            </a>
+
+            <a href="program.html">
+                Program
+            </a>
+
+            <a href="berita.html">
+                Berita
+            </a>
+
+            <a href="galeri.html">
+                Galeri
+            </a>
+
+            <a href="paparan.html">
+                Paparan
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-contact">
+
+            <h3>
+                Kontak
+            </h3>
+
+            <p>
+                Dinas Sosial
+            </p>
+
+            <p>
+                Kabupaten/Kota
+            </p>
+
+            <p>
+                Email: info@contoh.go.id
+            </p>
+
+            <p>
+                Telepon: -
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Website Layak Anak.
+            Semua hak dilindungi.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+// =========================
+// AMBIL ID PROGRAM
+// =========================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const programIndex =
+    parseInt(
+        urlParams.get("id")
+    );
+
+
+
+// =========================
+// AMBIL DATA PROGRAM
+// =========================
+
+const programData =
+    JSON.parse(
+        localStorage.getItem("programData")
+    ) || [];
+
+
+
+const programDetail =
+    document.getElementById(
+        "programDetail"
+    );
+
+
+
+// =========================
+// CEK DATA
+// =========================
+
+if (
+    isNaN(programIndex) ||
+    !programData[programIndex]
+) {
+
+
+    programDetail.innerHTML = `
+
+        <div class="program-not-found">
+
+            <h2>
+                Program Tidak Ditemukan
+            </h2>
+
+            <p>
+                Data program yang kamu cari
+                tidak tersedia.
+            </p>
+
+            <a
+                href="program.html"
+                class="back-button"
+            >
+                ← Kembali ke Program
+            </a>
+
+        </div>
+
+    `;
+
+
+}
+
+
+// =========================
+// TAMPILKAN DETAIL
+// =========================
+
+else {
+
+
+    const program =
+        programData[programIndex];
+
+
+    programDetail.innerHTML = `
+
+        <div class="program-detail-image">
+
+            ${
+                program.image
+
+                ? `
+
+                    <img
+                        src="${program.image}"
+                        alt="${program.title}"
+                    >
+
+                `
+
+                : `
+
+                    <div class="program-no-image">
+                        PROGRAM LAYAK ANAK
+                    </div>
+
+                `
+            }
+
+        </div>
+
+
+
+        <div class="program-detail-content">
+
+            <span class="program-detail-category">
+
+                ${program.category}
+
+            </span>
+
+
+            <h1>
+
+                ${program.title}
+
+            </h1>
+
+
+            <p>
+
+                ${program.description}
+
+            </p>
+
+
+            <a
+                href="program.html"
+                class="back-button"
+            >
+
+                ← Kembali ke Program
+
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

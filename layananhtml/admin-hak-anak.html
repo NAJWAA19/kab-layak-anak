@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kelola Hak Anak | Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- =========================
+     HEADER ADMIN
+========================= -->
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+
+        <h2>
+            LAYAK ANAK
+        </h2>
+
+        <span>
+            ADMIN PANEL
+        </span>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span>
+            Admin
+        </span>
+
+        <button
+            onclick="logout()"
+            class="logout-button"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     KONTEN
+========================= -->
+
+<section class="admin-dashboard">
+
+
+    <div class="admin-title">
+
+        <p class="section-label">
+            KELOLA HAK ANAK
+        </p>
+
+        <h1>
+            Klaster Hak Anak
+        </h1>
+
+        <p>
+            Kelola informasi yang ditampilkan pada
+            lima klaster Hak Anak.
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         DAFTAR KLASTER
+    ========================== -->
+
+    <div
+        id="adminClusterContainer"
+        class="admin-cluster-container"
+    >
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     MODAL EDIT
+========================= -->
+
+<div
+    id="editModal"
+    class="admin-modal"
+>
+
+
+    <div class="admin-modal-content">
+
+
+        <div class="admin-modal-header">
+
+            <div>
+
+                <p class="section-label">
+                    EDIT KLASTER
+                </p>
+
+                <h2 id="modalTitle">
+                    Edit Klaster
+                </h2>
+
+            </div>
+
+
+            <button
+                onclick="closeModal()"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form
+            id="clusterForm"
+        >
+
+
+            <div class="form-group">
+
+                <label>
+                    Nama Klaster
+                </label>
+
+                <input
+                    type="text"
+                    id="clusterName"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Deskripsi
+                </label>
+
+                <textarea
+                    id="clusterDescription"
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Isi / Ruang Lingkup
+                </label>
+
+                <textarea
+                    id="clusterPoints"
+                    placeholder="Satu poin per baris"
+                    required
+                ></textarea>
+
+                <small class="image-help">
+                    Tulis setiap isi atau ruang lingkup
+                    pada baris yang berbeda.
+                </small>
+
+            </div>
+
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    onclick="closeModal()"
+                    class="cancel-button"
+                >
+                    Batal
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Simpan Perubahan
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Panel Administrator.
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+
+// =========================
+// CEK LOGIN
+// =========================
+
+const isAdmin =
+    localStorage.getItem(
+        "adminLogin"
+    );
+
+
+if (isAdmin !== "true") {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =========================
+// DATA DEFAULT
+// =========================
+
+const defaultClusters = [
+
+    {
+        id: 1,
+
+        number: "01",
+
+        icon: "🪪",
+
+        title:
+            "Hak Sipil dan Kebebasan",
+
+        description:
+            "Pemenuhan hak anak atas identitas, pencatatan kelahiran, informasi, serta kesempatan untuk menyampaikan pendapat dan berpartisipasi.",
+
+        points: [
+
+            "Hak memperoleh identitas",
+
+            "Hak memperoleh akta kelahiran",
+
+            "Hak memperoleh informasi",
+
+            "Hak menyampaikan pendapat",
+
+            "Hak untuk berpartisipasi"
+
+        ]
+
+    },
+
+
+    {
+        id: 2,
+
+        number: "02",
+
+        icon: "🏠",
+
+        title:
+            "Lingkungan Keluarga dan Pengasuhan",
+
+        description:
+            "Dukungan terhadap keluarga dan pengasuhan yang aman agar anak dapat tumbuh dan berkembang dalam lingkungan yang mendukung.",
+
+        points: [
+
+            "Pengasuhan yang layak",
+
+            "Lingkungan keluarga yang aman",
+
+            "Dukungan bagi keluarga",
+
+            "Pencegahan penelantaran anak",
+
+            "Pemenuhan kebutuhan anak dalam keluarga"
+
+        ]
+
+    },
+
+
+    {
+        id: 3,
+
+        number: "03",
+
+        icon: "❤️",
+
+        title:
+            "Kesehatan Dasar dan Kesejahteraan",
+
+        description:
+            "Pemenuhan kebutuhan kesehatan, gizi, sanitasi, serta kesejahteraan anak dalam kehidupan sehari-hari.",
+
+        points: [
+
+            "Pelayanan kesehatan anak",
+
+            "Pemenuhan kebutuhan gizi",
+
+            "Akses terhadap air bersih",
+
+            "Sanitasi yang layak",
+
+            "Pemenuhan kesejahteraan anak"
+
+        ]
+
+    },
+
+
+    {
+        id: 4,
+
+        number: "04",
+
+        icon: "🎓",
+
+        title:
+            "Pendidikan, Waktu Luang dan Budaya",
+
+        description:
+            "Dukungan terhadap pendidikan, kegiatan bermain, waktu luang, kreativitas, olahraga, dan pengembangan budaya anak.",
+
+        points: [
+
+            "Akses pendidikan",
+
+            "Lingkungan pendidikan yang aman",
+
+            "Kesempatan bermain",
+
+            "Kegiatan olahraga dan kreativitas",
+
+            "Pengembangan minat dan bakat"
+
+        ]
+
+    },
+
+
+    {
+        id: 5,
+
+        number: "05",
+
+        icon: "🛡️",
+
+        title:
+            "Perlindungan Khusus",
+
+        description:
+            "Perlindungan dan pelayanan bagi anak yang berada dalam kondisi tertentu dan membutuhkan perlindungan khusus.",
+
+        points: [
+
+            "Perlindungan dari kekerasan",
+
+            "Perlindungan dari eksploitasi",
+
+            "Perlindungan dari diskriminasi",
+
+            "Perlindungan bagi anak dalam kondisi khusus",
+
+            "Pelayanan bagi anak yang membutuhkan perlindungan"
+
+        ]
+
+    }
+
+];
+
+
+
+// =========================
+// AMBIL DATA LOCAL STORAGE
+// =========================
+
+let clusters =
+    JSON.parse(
+        localStorage.getItem(
+            "clusterData"
+        )
+    );
+
+
+// Kalau belum ada,
+// gunakan data default
+
+if (
+    !clusters ||
+    !Array.isArray(clusters)
+) {
+
+    clusters =
+        defaultClusters;
+
+    localStorage.setItem(
+        "clusterData",
+        JSON.stringify(clusters)
+    );
+
+}
+
+
+
+// =========================
+// CONTAINER
+// =========================
+
+const container =
+    document.getElementById(
+        "adminClusterContainer"
+    );
+
+
+
+let editingId = null;
+
+
+
+// =========================
+// TAMPILKAN KLASTER
+// =========================
+
+function displayClusters() {
+
+    container.innerHTML = "";
+
+
+    clusters.forEach(
+        function(cluster) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "admin-cluster-card";
+
+
+
+            card.innerHTML = `
+
+                <div class="admin-cluster-top">
+
+                    <span class="admin-cluster-number">
+
+                        ${cluster.number}
+
+                    </span>
+
+                    <span class="admin-cluster-icon">
+
+                        ${cluster.icon}
+
+                    </span>
+
+                </div>
+
+
+                <span class="admin-cluster-label">
+
+                    KLASTER ${cluster.number}
+
+                </span>
+
+
+                <h3>
+
+                    ${cluster.title}
+
+                </h3>
+
+
+                <p>
+
+                    ${cluster.description}
+
+                </p>
+
+
+                <div class="admin-cluster-actions">
+
+                    <button
+                        onclick="editCluster(${cluster.id})"
+                        class="edit-button"
+                    >
+
+                        Edit
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+// =========================
+// EDIT KLASTER
+// =========================
+
+function editCluster(id) {
+
+    const cluster =
+        clusters.find(
+            function(item) {
+
+                return item.id === id;
+
+            }
+        );
+
+
+    if (!cluster) {
+        return;
+    }
+
+
+    editingId =
+        id;
+
+
+    document.getElementById(
+        "clusterName"
+    ).value =
+        cluster.title;
+
+
+    document.getElementById(
+        "clusterDescription"
+    ).value =
+        cluster.description;
+
+
+    document.getElementById(
+        "clusterPoints"
+    ).value =
+        cluster.points.join("\n");
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Klaster " +
+        cluster.number;
+
+
+    document.getElementById(
+        "editModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+
+// =========================
+// SIMPAN PERUBAHAN
+// =========================
+
+document.getElementById(
+    "clusterForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const cluster =
+            clusters.find(
+                function(item) {
+
+                    return item.id === editingId;
+
+                }
+            );
+
+
+        if (!cluster) {
+            return;
+        }
+
+
+        cluster.title =
+            document.getElementById(
+                "clusterName"
+            ).value;
+
+
+        cluster.description =
+            document.getElementById(
+                "clusterDescription"
+            ).value;
+
+
+        cluster.points =
+            document.getElementById(
+                "clusterPoints"
+            ).value
+            .split("\n")
+            .map(
+                function(point) {
+
+                    return point.trim();
+
+                }
+            )
+            .filter(
+                function(point) {
+
+                    return point !== "";
+
+                }
+            );
+
+
+
+        localStorage.setItem(
+            "clusterData",
+            JSON.stringify(
+                clusters
+            )
+        );
+
+
+        closeModal();
+
+
+        displayClusters();
+
+
+        alert(
+            "Perubahan klaster berhasil disimpan."
+        );
+
+    }
+);
+
+
+
+// =========================
+// TUTUP MODAL
+// =========================
+
+function closeModal() {
+
+    document.getElementById(
+        "editModal"
+    ).classList.remove(
+        "show"
+    );
+
+    editingId = null;
+
+}
+
+
+
+// =========================
+// LOGOUT
+// =========================
+
+function logout() {
+
+    localStorage.removeItem(
+        "adminLogin"
+    );
+
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =========================
+// TAMPILKAN
+// =========================
+
+displayClusters();
+
+
+</script>
+
+
+</body>
+
+</html>

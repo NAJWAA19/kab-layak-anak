@@ -1,0 +1,3495 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Paparan | Layak Anak</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #f4f7fb;
+
+            color:
+                #1e293b;
+
+            min-height:
+                100vh;
+
+        }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        header {
+
+            height:
+                78px;
+
+            background:
+                #ffffff;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding:
+                0 52px;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+        }
+
+
+        .logo {
+
+            color:
+                #1976d2;
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        .admin-area {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+        }
+
+
+        .admin-name {
+
+            font-weight:
+                700;
+
+            color:
+                #334155;
+
+        }
+
+
+        .logout-btn {
+
+            border:
+                none;
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+            padding:
+                11px 19px;
+
+            border-radius:
+                10px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background:
+                #fecaca;
+
+        }
+
+
+
+        /* ==================================================
+           CONTAINER
+        ================================================== */
+
+        .container {
+
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                50px 25px 80px;
+
+        }
+
+
+        .page-title {
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .page-title h1 {
+
+            font-size:
+                38px;
+
+            color:
+                #172b4d;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .page-title p {
+
+            color:
+                #64748b;
+
+            font-size:
+                16px;
+
+        }
+
+
+
+        /* ==================================================
+           CARD
+        ================================================== */
+
+        .card {
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius:
+                18px;
+
+            padding:
+                30px;
+
+            margin-bottom:
+                30px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(15, 23, 42, 0.05);
+
+        }
+
+
+        .card h2 {
+
+            color:
+                #172b4d;
+
+            font-size:
+                24px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .card-description {
+
+            color:
+                #64748b;
+
+            line-height:
+                1.6;
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+
+        /* ==================================================
+           FORM
+        ================================================== */
+
+        .form-group {
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .form-group label {
+
+            display:
+                block;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #334155;
+
+        }
+
+
+        .form-group input[type="text"],
+
+        .form-group textarea {
+
+            width:
+                100%;
+
+            border:
+                1px solid #d7dee8;
+
+            border-radius:
+                10px;
+
+            padding:
+                14px 15px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                15px;
+
+            outline:
+                none;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .form-group input[type="text"]:focus,
+
+        .form-group textarea:focus {
+
+            border-color:
+                #1976d2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(25,118,210,0.10);
+
+        }
+
+
+        .form-group textarea {
+
+            min-height:
+                130px;
+
+            resize:
+                vertical;
+
+            line-height:
+                1.6;
+
+        }
+
+
+
+        /* ==================================================
+           UPLOAD PDF
+        ================================================== */
+
+        .upload-box {
+
+            border:
+                2px dashed #cbd5e1;
+
+            border-radius:
+                16px;
+
+            padding:
+                30px;
+
+            background:
+                #f8fafc;
+
+            text-align:
+                center;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .upload-box.dragover {
+
+            border-color:
+                #1976d2;
+
+            background:
+                #eff6ff;
+
+        }
+
+
+        .upload-icon {
+
+            width:
+                70px;
+
+            height:
+                70px;
+
+            margin:
+                0 auto 15px;
+
+            border-radius:
+                18px;
+
+            background:
+                #e3f2fd;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                35px;
+
+        }
+
+
+        .upload-box h3 {
+
+            color:
+                #172b4d;
+
+            font-size:
+                20px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .upload-box p {
+
+            color:
+                #64748b;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .choose-file-btn {
+
+            display:
+                inline-block;
+
+            background:
+                #1976d2;
+
+            color:
+                white;
+
+            padding:
+                13px 25px;
+
+            border-radius:
+                10px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .choose-file-btn:hover {
+
+            background:
+                #1565c0;
+
+        }
+
+
+        #filePdf {
+
+            display:
+                none;
+
+        }
+
+
+        .upload-info {
+
+            margin-top:
+                15px;
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+
+        /* ==================================================
+           FILE PREVIEW
+        ================================================== */
+
+        .file-preview {
+
+            display:
+                none;
+
+            margin-top:
+                20px;
+
+            padding:
+                15px;
+
+            border:
+                1px solid #bfdbfe;
+
+            border-radius:
+                12px;
+
+            background:
+                #eff6ff;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            text-align:
+                left;
+
+        }
+
+
+        .file-preview.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .file-icon {
+
+            width:
+                50px;
+
+            height:
+                50px;
+
+            border-radius:
+                10px;
+
+            background:
+                #fee2e2;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                25px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .file-details {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+        }
+
+
+        .file-details strong {
+
+            display:
+                block;
+
+            color:
+                #172b4d;
+
+            word-break:
+                break-word;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .file-details span {
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .remove-file {
+
+            border:
+                none;
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+            width:
+                35px;
+
+            height:
+                35px;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                700;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+
+        /* ==================================================
+           BUTTON
+        ================================================== */
+
+        .button-area {
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            margin-top:
+                25px;
+
+        }
+
+
+        .save-btn,
+
+        .reset-btn,
+
+        .cancel-edit-btn {
+
+            border:
+                none;
+
+            padding:
+                13px 23px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                15px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .save-btn {
+
+            background:
+                #1976d2;
+
+            color:
+                white;
+
+        }
+
+
+        .save-btn:hover {
+
+            background:
+                #1565c0;
+
+        }
+
+
+        .save-btn:disabled {
+
+            background:
+                #94a3b8;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        .reset-btn {
+
+            background:
+                #e2e8f0;
+
+            color:
+                #334155;
+
+        }
+
+
+        .reset-btn:hover {
+
+            background:
+                #cbd5e1;
+
+        }
+
+
+        .cancel-edit-btn {
+
+            display:
+                none;
+
+            background:
+                #fef3c7;
+
+            color:
+                #92400e;
+
+        }
+
+
+        .cancel-edit-btn.show {
+
+            display:
+                inline-block;
+
+        }
+
+
+
+        /* ==================================================
+           STATUS
+        ================================================== */
+
+        #statusMessage {
+
+            display:
+                none;
+
+            padding:
+                14px 17px;
+
+            border-radius:
+                10px;
+
+            margin-top:
+                20px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        #statusMessage.success {
+
+            display:
+                block;
+
+            background:
+                #dcfce7;
+
+            color:
+                #166534;
+
+        }
+
+
+        #statusMessage.error {
+
+            display:
+                block;
+
+            background:
+                #fee2e2;
+
+            color:
+                #991b1b;
+
+        }
+
+
+        #statusMessage.info {
+
+            display:
+                block;
+
+            background:
+                #dbeafe;
+
+            color:
+                #1e40af;
+
+        }
+
+
+
+        /* ==================================================
+           DATABASE STATUS
+        ================================================== */
+
+        .database-status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            margin-top:
+                15px;
+
+            padding:
+                8px 13px;
+
+            border-radius:
+                20px;
+
+            background:
+                #fef3c7;
+
+            color:
+                #92400e;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .database-status.ready {
+
+            background:
+                #dcfce7;
+
+            color:
+                #166534;
+
+        }
+
+
+        .status-dot {
+
+            width:
+                8px;
+
+            height:
+                8px;
+
+            border-radius:
+                50%;
+
+            background:
+                currentColor;
+
+        }
+
+
+
+        /* ==================================================
+           DATA HEADER
+        ================================================== */
+
+        .data-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .data-count {
+
+            background:
+                #e3f2fd;
+
+            color:
+                #1976d2;
+
+            padding:
+                8px 14px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+
+        /* ==================================================
+           MATERI ITEM
+        ================================================== */
+
+        #materiAdminList {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                15px;
+
+        }
+
+
+        .materi-item {
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius:
+                14px;
+
+            padding:
+                20px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .materi-item:hover {
+
+            border-color:
+                #bfdbfe;
+
+            box-shadow:
+                0 5px 20px
+                rgba(25,118,210,0.07);
+
+        }
+
+
+        .materi-info {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+        }
+
+
+        .materi-label {
+
+            color:
+                #1976d2;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .materi-info h3 {
+
+            font-size:
+                19px;
+
+            color:
+                #172b4d;
+
+            margin-bottom:
+                7px;
+
+            word-break:
+                break-word;
+
+        }
+
+
+        .materi-info p {
+
+            color:
+                #64748b;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.5;
+
+            margin-bottom:
+                10px;
+
+            white-space:
+                pre-line;
+
+        }
+
+
+        .materi-file {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid #e2e8f0;
+
+            padding:
+                7px 10px;
+
+            border-radius:
+                8px;
+
+            color:
+                #475569;
+
+            font-size:
+                13px;
+
+            max-width:
+                100%;
+
+        }
+
+
+        .materi-actions {
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .edit-btn,
+
+        .delete-btn {
+
+            border:
+                none;
+
+            padding:
+                10px 15px;
+
+            border-radius:
+                8px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .edit-btn {
+
+            background:
+                #dbeafe;
+
+            color:
+                #1d4ed8;
+
+        }
+
+
+        .edit-btn:hover {
+
+            background:
+                #bfdbfe;
+
+        }
+
+
+        .delete-btn {
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background:
+                #fecaca;
+
+        }
+
+
+
+        /* ==================================================
+           EMPTY
+        ================================================== */
+
+        .empty {
+
+            text-align:
+                center;
+
+            padding:
+                50px 20px;
+
+            border:
+                1px dashed #cbd5e1;
+
+            border-radius:
+                12px;
+
+            color:
+                #64748b;
+
+        }
+
+
+        .empty-icon {
+
+            font-size:
+                40px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+
+        /* ==================================================
+           EDIT MODE
+        ================================================== */
+
+        .edit-mode {
+
+            border:
+                2px solid #93c5fd;
+
+            background:
+                #f8fbff;
+
+        }
+
+
+        .edit-badge {
+
+            display:
+                none;
+
+            background:
+                #dbeafe;
+
+            color:
+                #1d4ed8;
+
+            padding:
+                8px 12px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .edit-badge.show {
+
+            display:
+                inline-block;
+
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+
+            text-align:
+                center;
+
+            padding:
+                25px;
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding:
+                    0 20px;
+
+            }
+
+
+            .admin-name {
+
+                display:
+                    none;
+
+            }
+
+
+            .container {
+
+                padding:
+                    35px 15px 60px;
+
+            }
+
+
+            .card {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .page-title h1 {
+
+                font-size:
+                    30px;
+
+            }
+
+
+            .materi-item {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+            }
+
+
+            .materi-actions {
+
+                width:
+                    100%;
+
+            }
+
+
+            .edit-btn,
+
+            .delete-btn {
+
+                flex:
+                    1;
+
+            }
+
+
+            .button-area {
+
+                flex-wrap:
+                    wrap;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <div class="logo">
+        LAYAK ANAK
+    </div>
+
+
+    <div class="admin-area">
+
+        <div class="admin-name">
+            👤 Administrator
+        </div>
+
+
+        <button
+            type="button"
+            class="logout-btn"
+            onclick="keluarAdmin()"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     CONTENT
+================================================== -->
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            Admin Panel
+        </h1>
+
+        <p>
+            Kelola materi paparan Website Layak Anak.
+        </p>
+
+
+        <div
+            id="databaseStatus"
+            class="database-status"
+        >
+
+            <span class="status-dot"></span>
+
+            Menghubungkan database...
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         FORM
+    ================================================== -->
+
+    <section
+        id="formCard"
+        class="card"
+    >
+
+
+        <div
+            id="editBadge"
+            class="edit-badge"
+        >
+            ✏️ Sedang mengedit materi
+        </div>
+
+
+        <h2 id="formTitle">
+            Tambah Materi Paparan
+        </h2>
+
+
+        <p class="card-description">
+
+            Tambahkan judul, deskripsi, dan file PDF
+            yang akan ditampilkan pada halaman Paparan.
+
+        </p>
+
+
+
+        <form
+            id="formPaparan"
+        >
+
+
+            <!-- JUDUL -->
+
+            <div class="form-group">
+
+                <label for="judul">
+                    Judul Paparan
+                </label>
+
+
+                <input
+                    type="text"
+                    id="judul"
+                    placeholder="Contoh: Kebijakan Kabupaten Layak Anak"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- DESKRIPSI -->
+
+            <div class="form-group">
+
+                <label for="deskripsi">
+                    Deskripsi
+                </label>
+
+
+                <textarea
+                    id="deskripsi"
+                    placeholder="Masukkan deskripsi singkat materi paparan"
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- PDF -->
+
+            <div class="form-group">
+
+                <label>
+                    File PDF
+                </label>
+
+
+                <div
+                    id="uploadBox"
+                    class="upload-box"
+                >
+
+
+                    <div class="upload-icon">
+                        📄
+                    </div>
+
+
+                    <h3>
+                        Pilih Dokumen PDF
+                    </h3>
+
+
+                    <p>
+                        Klik tombol di bawah atau tarik file PDF
+                        ke area ini.
+                    </p>
+
+
+                    <label
+                        for="filePdf"
+                        class="choose-file-btn"
+                    >
+                        📁 Pilih File PDF
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="filePdf"
+                        accept="application/pdf,.pdf"
+                    >
+
+
+                    <div class="upload-info">
+
+                        Format PDF • Maksimal 20 MB
+
+                    </div>
+
+
+                    <!-- FILE PREVIEW -->
+
+                    <div
+                        id="filePreview"
+                        class="file-preview"
+                    >
+
+                        <div class="file-icon">
+                            📄
+                        </div>
+
+
+                        <div class="file-details">
+
+                            <strong id="selectedFileName">
+                                -
+                            </strong>
+
+                            <span id="selectedFileSize">
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="remove-file"
+                            onclick="hapusFilePilihan()"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTON -->
+
+            <div class="button-area">
+
+
+                <button
+                    type="submit"
+                    id="saveButton"
+                    class="save-btn"
+                    disabled
+                >
+                    💾 Simpan Materi
+                </button>
+
+
+                <button
+                    type="button"
+                    class="reset-btn"
+                    onclick="resetForm()"
+                >
+                    Reset
+                </button>
+
+
+                <button
+                    type="button"
+                    id="cancelEditButton"
+                    class="cancel-edit-btn"
+                    onclick="batalEdit()"
+                >
+                    ✕ Batal Edit
+                </button>
+
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="statusMessage"
+            ></div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         MATERI TERSIMPAN
+    ================================================== -->
+
+    <section class="card">
+
+
+        <div class="data-header">
+
+            <h2>
+                Materi Tersimpan
+            </h2>
+
+
+            <div
+                id="dataCount"
+                class="data-count"
+            >
+                0 Materi
+            </div>
+
+        </div>
+
+
+        <div id="materiAdminList">
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📄
+                </div>
+
+                Memuat materi...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    © 2026 Website Layak Anak.
+    Semua hak dilindungi.
+
+</footer>
+
+
+
+<script>
+
+
+/* ==================================================
+   KONFIGURASI DATABASE
+================================================== */
+
+const DB_NAME =
+    "LayakAnakDB";
+
+
+/*
+ * Gunakan versi 2.
+ *
+ * Versi ini tetap menggunakan database
+ * yang sama sehingga data lama tidak hilang.
+ */
+
+const DB_VERSION =
+    2;
+
+
+const STORE_NAME =
+    "paparan";
+
+
+let db =
+    null;
+
+
+let sedangEditId =
+    null;
+
+
+let fileTerpilih =
+    null;
+
+
+
+/* ==================================================
+   ELEMEN
+================================================== */
+
+const form =
+    document.getElementById(
+        "formPaparan"
+    );
+
+
+const fileInput =
+    document.getElementById(
+        "filePdf"
+    );
+
+
+const uploadBox =
+    document.getElementById(
+        "uploadBox"
+    );
+
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+
+const databaseStatus =
+    document.getElementById(
+        "databaseStatus"
+    );
+
+
+
+/* ==================================================
+   FORMAT UKURAN FILE
+================================================== */
+
+function formatUkuranFile(bytes) {
+
+    if (!bytes) {
+
+        return "0 KB";
+
+    }
+
+
+    if (bytes < 1024) {
+
+        return bytes + " B";
+
+    }
+
+
+    if (bytes < 1024 * 1024) {
+
+        return (
+            (bytes / 1024).toFixed(1) +
+            " KB"
+        );
+
+    }
+
+
+    return (
+        (bytes / (1024 * 1024)).toFixed(2) +
+        " MB"
+    );
+
+}
+
+
+
+/* ==================================================
+   BUKA DATABASE
+================================================== */
+
+function bukaDatabase() {
+
+    return new Promise(
+        function(resolve, reject) {
+
+            const request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
+                );
+
+
+            /*
+             * Upgrade database.
+             */
+
+            request.onupgradeneeded =
+                function(event) {
+
+                    const database =
+                        event.target.result;
+
+
+                    console.log(
+                        "Upgrade database..."
+                    );
+
+
+                    /*
+                     * Jangan hapus object store lama.
+                     *
+                     * Jika belum ada,
+                     * baru dibuat.
+                     */
+
+                    if (
+                        !database.objectStoreNames
+                            .contains(STORE_NAME)
+                    ) {
+
+                        database.createObjectStore(
+                            STORE_NAME,
+                            {
+                                keyPath: "id",
+                                autoIncrement: true
+                            }
+                        );
+
+                    }
+
+                };
+
+
+
+            /*
+             * Berhasil.
+             */
+
+            request.onsuccess =
+                function(event) {
+
+                    db =
+                        event.target.result;
+
+
+                    console.log(
+                        "Database berhasil dibuka:",
+                        db.name
+                    );
+
+
+                    console.log(
+                        "Database version:",
+                        db.version
+                    );
+
+
+                    console.log(
+                        "Object stores:",
+                        Array.from(
+                            db.objectStoreNames
+                        )
+                    );
+
+
+                    /*
+                     * Jika halaman lain
+                     * mencoba upgrade database,
+                     * tutup koneksi ini.
+                     */
+
+                    db.onversionchange =
+                        function() {
+
+                            db.close();
+
+                            console.warn(
+                                "Database ditutup karena ada perubahan versi."
+                            );
+
+                        };
+
+
+                    /*
+                     * Pastikan store paparan ada.
+                     */
+
+                    if (
+                        !db.objectStoreNames
+                            .contains(STORE_NAME)
+                    ) {
+
+                        reject(
+                            new Error(
+                                "Object store paparan tidak tersedia."
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    databaseStatus.classList.add(
+                        "ready"
+                    );
+
+
+                    databaseStatus.innerHTML = `
+
+                        <span class="status-dot"></span>
+
+                        Database siap
+
+                    `;
+
+
+                    /*
+                     * Aktifkan tombol simpan.
+                     */
+
+                    saveButton.disabled =
+                        false;
+
+
+                    resolve(db);
+
+                };
+
+
+
+            /*
+             * Gagal.
+             */
+
+            request.onerror =
+                function(event) {
+
+                    console.error(
+                        "Database error:",
+                        event.target.error
+                    );
+
+
+                    databaseStatus.classList.remove(
+                        "ready"
+                    );
+
+
+                    databaseStatus.innerHTML = `
+
+                        <span class="status-dot"></span>
+
+                        Database gagal dibuka
+
+                    `;
+
+
+                    reject(
+                        event.target.error ||
+                        new Error(
+                            "Database gagal dibuka."
+                        )
+                    );
+
+                };
+
+
+
+            /*
+             * Terblokir.
+             */
+
+            request.onblocked =
+                function() {
+
+                    console.warn(
+                        "Database terblokir."
+                    );
+
+
+                    tampilkanStatus(
+                        "Database sedang digunakan halaman lain. Tutup halaman Paparan/Admin lain lalu refresh.",
+                        "error"
+                    );
+
+                };
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   CEK FILE PDF
+================================================== */
+
+function validasiPdf(file) {
+
+    if (!file) {
+
+        return {
+            valid: false,
+            pesan: "File PDF belum dipilih."
+        };
+
+    }
+
+
+    const nama =
+        file.name.toLowerCase();
+
+
+    const isPdf =
+        file.type === "application/pdf" ||
+        nama.endsWith(".pdf");
+
+
+    if (!isPdf) {
+
+        return {
+            valid: false,
+            pesan: "File harus berupa PDF."
+        };
+
+    }
+
+
+    const maxSize =
+        20 * 1024 * 1024;
+
+
+    if (file.size > maxSize) {
+
+        return {
+            valid: false,
+            pesan: "Ukuran PDF maksimal 20 MB."
+        };
+
+    }
+
+
+    return {
+        valid: true
+    };
+
+}
+
+
+
+/* ==================================================
+   FILE DIPILIH
+================================================== */
+
+fileInput.addEventListener(
+    "change",
+    function() {
+
+        if (
+            !fileInput.files ||
+            !fileInput.files.length
+        ) {
+
+            return;
+
+        }
+
+
+        prosesFile(
+            fileInput.files[0]
+        );
+
+    }
+);
+
+
+
+/* ==================================================
+   PROSES FILE
+================================================== */
+
+function prosesFile(file) {
+
+    const hasil =
+        validasiPdf(file);
+
+
+    if (!hasil.valid) {
+
+        alert(
+            hasil.pesan
+        );
+
+
+        fileInput.value =
+            "";
+
+
+        fileTerpilih =
+            null;
+
+
+        sembunyikanPreviewFile();
+
+
+        return;
+
+    }
+
+
+    fileTerpilih =
+        file;
+
+
+    document.getElementById(
+        "selectedFileName"
+    ).textContent =
+        file.name;
+
+
+    document.getElementById(
+        "selectedFileSize"
+    ).textContent =
+        formatUkuranFile(
+            file.size
+        );
+
+
+    document.getElementById(
+        "filePreview"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* ==================================================
+   HAPUS FILE PILIHAN
+================================================== */
+
+function hapusFilePilihan() {
+
+    fileInput.value =
+        "";
+
+
+    fileTerpilih =
+        null;
+
+
+    sembunyikanPreviewFile();
+
+}
+
+
+
+/* ==================================================
+   SEMBUNYIKAN PREVIEW
+================================================== */
+
+function sembunyikanPreviewFile() {
+
+    document.getElementById(
+        "filePreview"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.getElementById(
+        "selectedFileName"
+    ).textContent =
+        "-";
+
+
+    document.getElementById(
+        "selectedFileSize"
+    ).textContent =
+        "-";
+
+}
+
+
+
+/* ==================================================
+   DRAG & DROP
+================================================== */
+
+uploadBox.addEventListener(
+    "dragover",
+    function(event) {
+
+        event.preventDefault();
+
+        uploadBox.classList.add(
+            "dragover"
+        );
+
+    }
+);
+
+
+uploadBox.addEventListener(
+    "dragleave",
+    function() {
+
+        uploadBox.classList.remove(
+            "dragover"
+        );
+
+    }
+);
+
+
+uploadBox.addEventListener(
+    "drop",
+    function(event) {
+
+        event.preventDefault();
+
+
+        uploadBox.classList.remove(
+            "dragover"
+        );
+
+
+        const files =
+            event.dataTransfer.files;
+
+
+        if (
+            files &&
+            files.length
+        ) {
+
+            prosesFile(
+                files[0]
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ==================================================
+   SIMPAN / UPDATE MATERI
+================================================== */
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        if (!db) {
+
+            tampilkanStatus(
+                "Database belum siap. Tunggu sampai status database berubah menjadi Database siap.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const judul =
+            document.getElementById(
+                "judul"
+            ).value.trim();
+
+
+        const deskripsi =
+            document.getElementById(
+                "deskripsi"
+            ).value.trim();
+
+
+        if (!judul) {
+
+            tampilkanStatus(
+                "Judul paparan belum diisi.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!deskripsi) {
+
+            tampilkanStatus(
+                "Deskripsi belum diisi.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Jika sedang menambah,
+         * file wajib ada.
+         */
+
+        if (
+            sedangEditId === null &&
+            !fileTerpilih
+        ) {
+
+            tampilkanStatus(
+                "Silakan pilih file PDF terlebih dahulu.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Jika tambah data.
+         */
+
+        if (sedangEditId === null) {
+
+            tambahMateri(
+                judul,
+                deskripsi,
+                fileTerpilih
+            );
+
+        }
+
+        /*
+         * Jika edit data.
+         */
+
+        else {
+
+            updateMateri(
+                sedangEditId,
+                judul,
+                deskripsi,
+                fileTerpilih
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ==================================================
+   TAMBAH MATERI
+================================================== */
+
+function tambahMateri(
+    judul,
+    deskripsi,
+    file
+) {
+
+    try {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const data = {
+
+            judul:
+                judul,
+
+            deskripsi:
+                deskripsi,
+
+            namaFile:
+                file.name,
+
+            file:
+                file,
+
+            tipeFile:
+                file.type ||
+                "application/pdf",
+
+            ukuranFile:
+                file.size,
+
+            tanggal:
+                new Date().toISOString()
+
+        };
+
+
+        const request =
+            store.add(
+                data
+            );
+
+
+        request.onsuccess =
+            function(event) {
+
+                console.log(
+                    "Materi berhasil ditambahkan:",
+                    event.target.result
+                );
+
+
+                tampilkanStatus(
+                    "✅ Materi berhasil disimpan dan PDF sudah masuk database.",
+                    "success"
+                );
+
+
+                resetForm();
+
+
+                tampilkanMateri();
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Gagal menambahkan materi:",
+                    event.target.error
+                );
+
+
+                tampilkanStatus(
+                    "❌ Materi gagal disimpan: " +
+                    (
+                        event.target.error?.message ||
+                        "kesalahan database"
+                    ),
+                    "error"
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Kesalahan tambah materi:",
+            error
+        );
+
+
+        tampilkanStatus(
+            "❌ Terjadi kesalahan saat menyimpan materi.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   UPDATE MATERI
+================================================== */
+
+function updateMateri(
+    id,
+    judul,
+    deskripsi,
+    fileBaru
+) {
+
+    try {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const request =
+            store.get(
+                Number(id)
+            );
+
+
+        request.onsuccess =
+            function() {
+
+                const data =
+                    request.result;
+
+
+                if (!data) {
+
+                    tampilkanStatus(
+                        "Materi yang ingin diedit tidak ditemukan.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * Update judul.
+                 */
+
+                data.judul =
+                    judul;
+
+
+                /*
+                 * Update deskripsi.
+                 */
+
+                data.deskripsi =
+                    deskripsi;
+
+
+                /*
+                 * Jika user memilih PDF baru,
+                 * ganti PDF lama.
+                 */
+
+                if (fileBaru) {
+
+                    data.file =
+                        fileBaru;
+
+                    data.namaFile =
+                        fileBaru.name;
+
+                    data.tipeFile =
+                        fileBaru.type ||
+                        "application/pdf";
+
+                    data.ukuranFile =
+                        fileBaru.size;
+
+                }
+
+
+                data.tanggalUpdate =
+                    new Date().toISOString();
+
+
+                const updateRequest =
+                    store.put(
+                        data
+                    );
+
+
+                updateRequest.onsuccess =
+                    function() {
+
+                        tampilkanStatus(
+                            "✅ Materi berhasil diperbarui.",
+                            "success"
+                        );
+
+
+                        batalEdit();
+
+
+                        tampilkanMateri();
+
+                    };
+
+
+                updateRequest.onerror =
+                    function(event) {
+
+                        console.error(
+                            "Gagal update:",
+                            event.target.error
+                        );
+
+
+                        tampilkanStatus(
+                            "❌ Materi gagal diperbarui.",
+                            "error"
+                        );
+
+                    };
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Gagal mengambil data:",
+                    event.target.error
+                );
+
+
+                tampilkanStatus(
+                    "Materi tidak dapat ditemukan.",
+                    "error"
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Update error:",
+            error
+        );
+
+
+        tampilkanStatus(
+            "Terjadi kesalahan saat mengedit materi.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   TAMPILKAN MATERI
+================================================== */
+
+function tampilkanMateri() {
+
+    if (!db) {
+
+        return;
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "materiAdminList"
+        );
+
+
+    const count =
+        document.getElementById(
+            "dataCount"
+        );
+
+
+    try {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readonly"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const request =
+            store.getAll();
+
+
+        request.onsuccess =
+            function() {
+
+                let data =
+                    request.result || [];
+
+
+                /*
+                 * Materi terbaru di atas.
+                 */
+
+                data.sort(
+                    function(a, b) {
+
+                        return (
+                            Number(b.id || 0) -
+                            Number(a.id || 0)
+                        );
+
+                    }
+                );
+
+
+                count.textContent =
+                    data.length +
+                    " Materi";
+
+
+                container.innerHTML =
+                    "";
+
+
+                if (!data.length) {
+
+                    container.innerHTML = `
+
+                        <div class="empty">
+
+                            <div class="empty-icon">
+                                📄
+                            </div>
+
+                            Belum ada materi tersimpan.
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                data.forEach(
+                    function(item, index) {
+
+                        const div =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        div.className =
+                            "materi-item";
+
+
+                        div.innerHTML = `
+
+                            <div class="materi-info">
+
+                                <div class="materi-label">
+
+                                    MATERI
+                                    ${String(index + 1).padStart(2, "0")}
+
+                                </div>
+
+
+                                <h3>
+
+                                    ${escapeHtml(
+                                        item.judul ||
+                                        "Tanpa Judul"
+                                    )}
+
+                                </h3>
+
+
+                                <p>
+
+                                    ${escapeHtml(
+                                        item.deskripsi ||
+                                        "Tidak ada deskripsi."
+                                    )}
+
+                                </p>
+
+
+                                <div class="materi-file">
+
+                                    📄
+
+                                    ${escapeHtml(
+                                        item.namaFile ||
+                                        "Dokumen PDF"
+                                    )}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="materi-actions">
+
+
+                                <button
+                                    type="button"
+                                    class="edit-btn"
+                                    onclick="editMateri(${item.id})"
+                                >
+
+                                    ✏️ Edit
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                    onclick="hapusMateri(${item.id})"
+                                >
+
+                                    🗑 Hapus
+
+                                </button>
+
+
+                            </div>
+
+                        `;
+
+
+                        container.appendChild(
+                            div
+                        );
+
+                    }
+                );
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Gagal membaca materi:",
+                    event.target.error
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Kesalahan tampilkan materi:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   EDIT MATERI
+================================================== */
+
+function editMateri(id) {
+
+    if (!db) {
+
+        tampilkanStatus(
+            "Database belum siap.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readonly"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const request =
+            store.get(
+                Number(id)
+            );
+
+
+        request.onsuccess =
+            function() {
+
+                const data =
+                    request.result;
+
+
+                if (!data) {
+
+                    tampilkanStatus(
+                        "Materi tidak ditemukan.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                sedangEditId =
+                    Number(id);
+
+
+                /*
+                 * Isi form.
+                 */
+
+                document.getElementById(
+                    "judul"
+                ).value =
+                    data.judul || "";
+
+
+                document.getElementById(
+                    "deskripsi"
+                ).value =
+                    data.deskripsi || "";
+
+
+                /*
+                 * File baru belum dipilih.
+                 */
+
+                fileTerpilih =
+                    null;
+
+
+                fileInput.value =
+                    "";
+
+
+                /*
+                 * Tampilkan mode edit.
+                 */
+
+                document.getElementById(
+                    "formCard"
+                ).classList.add(
+                    "edit-mode"
+                );
+
+
+                document.getElementById(
+                    "editBadge"
+                ).classList.add(
+                    "show"
+                );
+
+
+                document.getElementById(
+                    "formTitle"
+                ).textContent =
+                    "Edit Materi Paparan";
+
+
+                document.getElementById(
+                    "saveButton"
+                ).textContent =
+                    "💾 Simpan Perubahan";
+
+
+                document.getElementById(
+                    "cancelEditButton"
+                ).classList.add(
+                    "show"
+                );
+
+
+                /*
+                 * Tampilkan PDF lama
+                 * sebagai informasi.
+                 */
+
+                if (data.namaFile) {
+
+                    document.getElementById(
+                        "selectedFileName"
+                    ).textContent =
+                        "PDF saat ini: " +
+                        data.namaFile;
+
+
+                    document.getElementById(
+                        "selectedFileSize"
+                    ).textContent =
+                        "Pilih PDF baru hanya jika ingin menggantinya.";
+
+
+                    document.getElementById(
+                        "filePreview"
+                    ).classList.add(
+                        "show"
+                    );
+
+                }
+
+
+                /*
+                 * Scroll ke form.
+                 */
+
+                document.getElementById(
+                    "formCard"
+                ).scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            };
+
+
+        request.onerror =
+            function() {
+
+                tampilkanStatus(
+                    "Gagal mengambil materi untuk diedit.",
+                    "error"
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   BATAL EDIT
+================================================== */
+
+function batalEdit() {
+
+    sedangEditId =
+        null;
+
+
+    fileTerpilih =
+        null;
+
+
+    form.reset();
+
+
+    fileInput.value =
+        "";
+
+
+    sembunyikanPreviewFile();
+
+
+    document.getElementById(
+        "formCard"
+    ).classList.remove(
+        "edit-mode"
+    );
+
+
+    document.getElementById(
+        "editBadge"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.getElementById(
+        "formTitle"
+    ).textContent =
+        "Tambah Materi Paparan";
+
+
+    document.getElementById(
+        "saveButton"
+    ).textContent =
+        "💾 Simpan Materi";
+
+
+    document.getElementById(
+        "cancelEditButton"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+
+/* ==================================================
+   RESET FORM
+================================================== */
+
+function resetForm() {
+
+    if (sedangEditId !== null) {
+
+        batalEdit();
+
+        return;
+
+    }
+
+
+    form.reset();
+
+
+    fileInput.value =
+        "";
+
+
+    fileTerpilih =
+        null;
+
+
+    sembunyikanPreviewFile();
+
+}
+
+
+
+/* ==================================================
+   HAPUS MATERI
+================================================== */
+
+function hapusMateri(id) {
+
+    if (!db) {
+
+        tampilkanStatus(
+            "Database belum siap.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const yakin =
+        confirm(
+            "Apakah kamu yakin ingin menghapus materi ini?"
+        );
+
+
+    if (!yakin) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+
+        const request =
+            store.delete(
+                Number(id)
+            );
+
+
+        request.onsuccess =
+            function() {
+
+                tampilkanStatus(
+                    "✅ Materi berhasil dihapus.",
+                    "success"
+                );
+
+
+                tampilkanMateri();
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Gagal menghapus:",
+                    event.target.error
+                );
+
+
+                tampilkanStatus(
+                    "❌ Materi gagal dihapus.",
+                    "error"
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        tampilkanStatus(
+            "Terjadi kesalahan saat menghapus materi.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   STATUS
+================================================== */
+
+function tampilkanStatus(
+    pesan,
+    tipe
+) {
+
+    const status =
+        document.getElementById(
+            "statusMessage"
+        );
+
+
+    status.textContent =
+        pesan;
+
+
+    status.className =
+        tipe;
+
+
+    status.style.display =
+        "block";
+
+
+    clearTimeout(
+        window.statusTimer
+    );
+
+
+    window.statusTimer =
+        setTimeout(
+            function() {
+
+                status.style.display =
+                    "none";
+
+            },
+            5000
+        );
+
+}
+
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+function keluarAdmin() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* ==================================================
+   INISIALISASI
+================================================== */
+
+async function init() {
+
+    try {
+
+        await bukaDatabase();
+
+
+        console.log(
+            "Admin Paparan siap digunakan."
+        );
+
+
+        tampilkanMateri();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Init database gagal:",
+            error
+        );
+
+
+        saveButton.disabled =
+            true;
+
+
+        tampilkanStatus(
+            "Database gagal dibuka. Coba refresh halaman.",
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   JALANKAN
+================================================== */
+
+init();
+
+</script>
+
+
+</body>
+
+</html>

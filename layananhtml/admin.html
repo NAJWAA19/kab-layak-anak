@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard Admin | Layak Anak</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- =================================
+     HEADER ADMIN
+================================= -->
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+
+        <h2>
+           KABUPATEN LAYAK ANAK
+        </h2>
+
+        <span>
+            ADMIN PANEL
+        </span>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span>
+            Admin
+        </span>
+
+        <button
+            onclick="logout()"
+            class="logout-button"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =================================
+     DASHBOARD ADMIN
+================================= -->
+
+<section class="admin-dashboard">
+
+
+    <!-- =================================
+         JUDUL DASHBOARD
+    ================================== -->
+
+    <div class="admin-title">
+
+        <p class="section-label">
+            DASHBOARD ADMIN
+        </p>
+
+
+        <h1>
+            Selamat Datang, Admin
+        </h1>
+
+
+        <p>
+            Kelola informasi yang ditampilkan pada
+            Website Layak Anak melalui halaman ini.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================
+         MENU ADMIN
+    ================================== -->
+
+    <div class="admin-menu">
+
+
+        <!-- =================================
+             01. HAK ANAK
+        ================================== -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-number">
+                01
+            </div>
+
+
+            <h3>
+                Kelola Hak Anak
+            </h3>
+
+
+            <p>
+                Mengelola informasi dan isi dari
+                setiap klaster hak anak.
+            </p>
+
+
+            <a href="admin-hak-anak.html">
+                Kelola →
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             02. PROGRAM
+        ================================== -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-number">
+                02
+            </div>
+
+
+            <h3>
+                Kelola Program
+            </h3>
+
+
+            <p>
+                Mengelola program dan kegiatan
+                Layak Anak.
+            </p>
+
+
+            <a href="admin-program.html">
+                Kelola →
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             03. BERITA
+        ================================== -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-number">
+                03
+            </div>
+
+
+            <h3>
+                Kelola Berita
+            </h3>
+
+
+            <p>
+                Mengelola berita dan informasi
+                kegiatan terbaru.
+            </p>
+
+
+            <a href="admin-berita.html">
+                Kelola →
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             04. PAPARAN
+        ================================== -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-number">
+                04
+            </div>
+
+
+            <h3>
+                Kelola Paparan
+            </h3>
+
+
+            <p>
+                Mengelola materi dan dokumen PDF
+                yang dapat dibaca oleh masyarakat.
+            </p>
+
+
+            <a href="admin-paparan.html">
+                Kelola →
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             05. KONTAK
+        ================================== -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-number">
+                05
+            </div>
+
+
+            <h3>
+                Kelola Kontak
+            </h3>
+
+
+            <p>
+                Mengelola informasi kontak
+                instansi.
+            </p>
+
+
+            <a
+                href="#"
+                onclick="comingSoon(event)"
+            >
+                Kelola →
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =================================
+     FOOTER
+================================= -->
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Panel Administrator.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =================================
+     JAVASCRIPT
+================================= -->
+
+<script>
+
+
+// =================================
+// CEK LOGIN ADMIN
+// =================================
+
+const isAdmin =
+    localStorage.getItem("adminLogin");
+
+
+if (isAdmin !== "true") {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =================================
+// LOGOUT
+// =================================
+
+function logout() {
+
+    localStorage.removeItem(
+        "adminLogin"
+    );
+
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+
+// =================================
+// FITUR BELUM TERSEDIA
+// =================================
+
+function comingSoon(event) {
+
+    event.preventDefault();
+
+
+    alert(
+        "Fitur ini belum tersedia. Akan dibuat pada tahap berikutnya."
+    );
+
+}
+
+
+</script>
+
+
+<!-- =================================
+     CSS KHUSUS GRID ADMIN
+================================= -->
+
+<style>
+
+/* =================================
+   GRID MENU ADMIN
+================================= */
+
+.admin-menu {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 32px;
+
+    align-items: stretch;
+
+}
+
+
+
+/* =================================
+   CARD ADMIN
+================================= */
+
+.admin-card {
+
+    width: 100%;
+
+    min-height: 280px;
+
+    box-sizing: border-box;
+
+}
+
+
+
+/* =================================
+   MENCEGAH CARD MELEBAR
+================================= */
+
+.admin-card:nth-child(1),
+.admin-card:nth-child(2),
+.admin-card:nth-child(3),
+.admin-card:nth-child(4),
+.admin-card:nth-child(5) {
+
+    grid-column: auto;
+
+}
+
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 900px) {
+
+    .admin-menu {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+
+/* =================================
+   HANDPHONE
+================================= */
+
+@media (max-width: 600px) {
+
+    .admin-menu {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+</style>
+
+
+</body>
+
+</html>

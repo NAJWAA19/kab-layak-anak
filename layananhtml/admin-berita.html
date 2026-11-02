@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kelola Berita | Admin</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="admin-page">
+
+
+<header class="admin-header">
+
+    <div class="admin-logo">
+
+        <h2>LAYAK ANAK</h2>
+
+        <span>ADMIN PANEL</span>
+
+    </div>
+
+
+    <div class="admin-user">
+
+        <span>Admin</span>
+
+        <button
+            onclick="logout()"
+            class="logout-button"
+        >
+            Keluar
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<section class="admin-dashboard">
+
+
+    <div class="admin-title">
+
+        <p class="section-label">
+            KELOLA BERITA
+        </p>
+
+        <h1>
+            Berita dan Kegiatan
+        </h1>
+
+        <p>
+            Tambahkan, ubah, atau hapus informasi berita
+            yang ditampilkan pada website.
+        </p>
+
+    </div>
+
+
+
+    <!-- Tombol tambah -->
+
+    <div class="admin-action">
+
+        <button
+            onclick="showForm()"
+            class="add-button"
+        >
+            + Tambah Berita
+        </button>
+
+    </div>
+
+
+
+    <!-- Form berita -->
+
+    <div
+        id="newsForm"
+        class="admin-form"
+        style="display: none;"
+    >
+
+        <h2 id="formTitle">
+            Tambah Berita
+        </h2>
+
+
+        <div class="form-group">
+
+            <label for="newsTitle">
+                Judul Berita
+            </label>
+
+            <input
+                type="text"
+                id="newsTitle"
+                placeholder="Masukkan judul berita"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="newsDate">
+                Tanggal
+            </label>
+
+            <input
+                type="date"
+                id="newsDate"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="newsImage">
+                Foto Berita
+            </label>
+
+    <input
+        type="file"
+        id="newsImage"
+        accept="image/*"
+    >
+
+    <small class="image-help">
+        Pilih foto dengan format JPG, JPEG, atau PNG.
+    </small>
+
+</div>
+        <div class="form-group">
+
+            <label for="newsDescription">
+                Isi Berita
+            </label>
+
+            <textarea
+                id="newsDescription"
+                rows="6"
+                placeholder="Masukkan isi berita"
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                onclick="saveNews()"
+                class="save-button"
+            >
+                Simpan
+            </button>
+
+            <button
+                onclick="cancelForm()"
+                class="cancel-button"
+            >
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Daftar berita -->
+
+    <div
+        id="newsList"
+        class="admin-news-list"
+    ></div>
+
+
+</section>
+
+
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Panel Administrator.
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    // =========================
+    // CEK LOGIN ADMIN
+    // =========================
+
+    const isAdmin =
+        localStorage.getItem("adminLogin");
+
+
+    if (isAdmin !== "true") {
+
+        window.location.href =
+            "admin-login.html";
+
+    }
+
+
+
+    // =========================
+    // DATA BERITA
+    // =========================
+
+    let newsData =
+    JSON.parse(
+        localStorage.getItem("newsData")
+    ) || [];
+
+
+// =========================
+// BERITA CONTOH
+// =========================
+
+// Cek apakah berita contoh
+// sudah pernah dimasukkan
+
+const defaultNewsAdded =
+    localStorage.getItem("defaultNewsAdded");
+
+
+if (defaultNewsAdded !== "true") {
+
+    const defaultNews = [
+
+        {
+            title:
+                "Kegiatan Penguatan Kabupaten/Kota Layak Anak",
+
+            date:
+                "2026-09-07",
+
+            description:
+                "Informasi mengenai kegiatan dan upaya pemerintah dalam mendukung pemenuhan hak dan perlindungan anak.",
+
+            image:
+                ""
+        },
+
+
+        {
+            title:
+                "Sosialisasi Pemenuhan Hak Anak",
+
+            date:
+                "2026-09-05",
+
+            description:
+                "Kegiatan sosialisasi sebagai bagian dari upaya meningkatkan pemahaman mengenai hak dan perlindungan anak.",
+
+            image:
+                ""
+        },
+
+
+        {
+            title:
+                "Kegiatan Forum Anak Daerah",
+
+            date:
+                "2026-09-03",
+
+            description:
+                "Informasi kegiatan partisipasi anak dalam pembangunan dan penyelenggaraan Kabupaten/Kota Layak Anak.",
+
+            image:
+                ""
+        }
+
+    ];
+
+
+    // Masukkan berita contoh
+    // ke bagian paling awal
+
+    newsData =
+        defaultNews.concat(newsData);
+
+
+    localStorage.setItem(
+        "newsData",
+        JSON.stringify(newsData)
+    );
+
+
+    // Tandai bahwa berita contoh
+    // sudah pernah dimasukkan
+
+    localStorage.setItem(
+        "defaultNewsAdded",
+        "true"
+    );
+
+}
+
+
+let editIndex = -1;
+
+
+
+    // =========================
+    // TAMPILKAN BERITA
+    // =========================
+
+    function displayNews() {
+
+        const newsList =
+            document.getElementById("newsList");
+
+
+        newsList.innerHTML = "";
+
+
+        if (newsData.length === 0) {
+
+            newsList.innerHTML = `
+                <div class="empty-news">
+                    <h3>Belum ada berita</h3>
+                    <p>
+                        Silakan tambahkan berita baru
+                        menggunakan tombol di atas.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        newsData.forEach((news, index) => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "admin-news-card";
+
+
+            card.innerHTML = `
+
+                <div class="admin-news-content">
+
+                    <span class="admin-news-date">
+                        ${news.date}
+                    </span>
+
+                    <h3>
+                        ${news.title}
+                    </h3>
+
+                    <p>
+                        ${news.description}
+                    </p>
+
+                </div>
+
+
+                <div class="admin-news-actions">
+
+                    <button
+                        onclick="editNews(${index})"
+                        class="edit-button"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        onclick="deleteNews(${index})"
+                        class="delete-button"
+                    >
+                        Hapus
+                    </button>
+
+                </div>
+
+            `;
+
+
+            newsList.appendChild(card);
+
+        });
+
+    }
+
+
+
+    // =========================
+    // TAMPILKAN FORM
+    // =========================
+
+    function showForm() {
+
+        editIndex = -1;
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Tambah Berita";
+
+
+        document.getElementById(
+            "newsTitle"
+        ).value = "";
+
+
+        document.getElementById(
+            "newsDate"
+        ).value = "";
+
+
+        document.getElementById(
+            "newsDescription"
+        ).value = "";
+
+
+        document.getElementById(
+            "newsForm"
+        ).style.display =
+            "block";
+
+    }
+
+
+
+    // =========================
+    // BATAL FORM
+    // =========================
+
+    function cancelForm() {
+
+        document.getElementById(
+            "newsForm"
+        ).style.display =
+            "none";
+
+    }
+
+
+
+    // =========================
+    // SIMPAN BERITA
+    // =========================
+
+    async function saveNews() {
+
+    const title =
+        document.getElementById("newsTitle").value.trim();
+
+    const date =
+        document.getElementById("newsDate").value;
+
+    const description =
+        document.getElementById("newsDescription").value.trim();
+
+    const imageInput =
+        document.getElementById("newsImage");
+
+
+    if (
+        title === "" ||
+        date === "" ||
+        description === ""
+    ) {
+
+        alert("Judul, tanggal, dan isi berita harus diisi.");
+
+        return;
+    }
+
+
+    let image = "";
+
+
+    // Jika admin memilih foto
+    if (imageInput.files.length > 0) {
+
+        const file = imageInput.files[0];
+
+        // Batasi ukuran maksimal 2 MB
+        if (file.size > 2 * 1024 * 1024) {
+
+            alert(
+                "Ukuran foto terlalu besar. Maksimal 2 MB."
+            );
+
+            return;
+        }
+
+
+        image = await convertImageToBase64(file);
+    }
+
+
+    const news = {
+
+        title: title,
+
+        date: date,
+
+        description: description,
+
+        image: image
+
+    };
+
+
+    // Tambah berita
+    if (editIndex === -1) {
+
+        newsData.push(news);
+
+    }
+
+    // Edit berita
+    else {
+
+        // Kalau tidak memilih foto baru,
+        // gunakan foto lama
+        if (image === "") {
+
+            news.image =
+                newsData[editIndex].image || "";
+
+        }
+
+        newsData[editIndex] = news;
+
+    }
+
+
+    localStorage.setItem(
+        "newsData",
+        JSON.stringify(newsData)
+    );
+
+
+    displayNews();
+
+    cancelForm();
+
+}
+
+
+
+    // =========================
+    // EDIT BERITA
+    // =========================
+
+    function editNews(index) {
+
+        const news =
+            newsData[index];
+
+
+        editIndex = index;
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Edit Berita";
+
+
+        document.getElementById(
+            "newsTitle"
+        ).value =
+            news.title;
+
+
+        document.getElementById(
+            "newsDate"
+        ).value =
+            news.date;
+
+
+        document.getElementById(
+            "newsDescription"
+        ).value =
+            news.description;
+
+
+        document.getElementById(
+            "newsForm"
+        ).style.display =
+            "block";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+
+    // =========================
+    // HAPUS BERITA
+    // =========================
+
+    function deleteNews(index) {
+
+        const yakin =
+            confirm(
+                "Apakah kamu yakin ingin menghapus berita ini?"
+            );
+
+
+        if (!yakin) {
+
+            return;
+
+        }
+
+
+        newsData.splice(
+            index,
+            1
+        );
+
+
+        localStorage.setItem(
+            "newsData",
+            JSON.stringify(newsData)
+        );
+
+
+        displayNews();
+
+    }
+
+
+
+    // =========================
+    // LOGOUT
+    // =========================
+
+    function logout() {
+
+        localStorage.removeItem(
+            "adminLogin"
+        );
+
+
+        window.location.href =
+            "admin-login.html";
+
+    }
+
+
+
+    // Jalankan saat halaman dibuka
+function convertImageToBase64(file) {
+
+    return new Promise(function(resolve, reject) {
+
+        const reader = new FileReader();
+
+
+        reader.onload = function() {
+
+            resolve(reader.result);
+
+        };
+
+
+        reader.onerror = function(error) {
+
+            reject(error);
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+    displayNews();
+
+</script>
+
+
+</body>
+
+</html>

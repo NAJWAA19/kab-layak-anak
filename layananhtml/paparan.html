@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Paparan | Layak Anak</title>
+<link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* ==================================================
+           BODY
+        ================================================== */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #1e293b;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+     
+
+        /* ==================================================
+           HERO
+        ================================================== */
+
+       /* ==================================================
+   HERO PAPARAN
+================================================== */
+
+.paparan-hero {
+    background: #f5f8fc;
+
+    padding: 65px 25px 55px;
+
+    text-align: center;
+
+    color: #1e293b;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.paparan-hero-label {
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 14px;
+
+    color: #1976d2;
+}
+
+
+.paparan-hero h1 {
+    font-size: 38px;
+
+    margin-bottom: 15px;
+
+    color: #1e293b;
+}
+
+
+.paparan-hero p {
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .paparan-content {
+            width: 100%;
+
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding: 65px 25px 80px;
+
+            flex: 1;
+        }
+
+
+        .paparan-title {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+
+        .paparan-title h2 {
+            font-size: 30px;
+
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+
+        .paparan-title p {
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==================================================
+           LIST MATERI
+        ================================================== */
+
+        #paparanMateriList {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 28px;
+        }
+
+
+        /* ==================================================
+           CARD
+        ================================================== */
+
+        .paparan-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.05);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .paparan-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .paparan-number {
+            color: #1976d2;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .paparan-card h3 {
+            color: #1e293b;
+
+            font-size: 22px;
+
+            line-height: 1.4;
+
+            margin-bottom: 12px;
+        }
+
+
+        .paparan-description {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            min-height: 48px;
+
+            margin-bottom: 20px;
+
+            white-space: pre-line;
+        }
+
+
+        /* ==================================================
+           PDF INFO
+        ================================================== */
+
+        .paparan-pdf {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            background: #f4f8fd;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .paparan-pdf-icon {
+            width: 42px;
+
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #e3f2fd;
+
+            border-radius: 9px;
+
+            font-size: 20px;
+        }
+
+
+        .paparan-pdf-info {
+            min-width: 0;
+        }
+
+
+        .paparan-pdf-info strong {
+            display: block;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+            word-break: break-word;
+        }
+
+
+        .paparan-pdf-info span {
+            display: block;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+
+        /* ==================================================
+           BUTTON
+        ================================================== */
+
+        .paparan-button {
+            width: 100%;
+
+            border: none;
+
+            background: #1976d2;
+
+            color: #ffffff;
+
+            padding: 13px 18px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.2s ease;
+        }
+
+
+        .paparan-button:hover {
+            background: #1565c0;
+        }
+
+
+        /* ==================================================
+           EMPTY STATE
+        ================================================== */
+
+        .paparan-empty {
+            grid-column: 1 / -1;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 60px 25px;
+
+            text-align: center;
+        }
+
+
+        .paparan-empty-icon {
+            font-size: 48px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .paparan-empty h3 {
+            color: #1e293b;
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .paparan-empty p {
+            color: #64748b;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==================================================
+           PDF MODAL
+        ================================================== */
+
+        .paparan-modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.75);
+
+            z-index: 9999;
+
+            padding: 20px;
+        }
+
+
+        .paparan-modal.show {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .paparan-modal-box {
+            width: 100%;
+
+            max-width: 1100px;
+
+            height: 92vh;
+
+            background: #ffffff;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .paparan-modal-header {
+            background: #1976d2;
+
+            color: #ffffff;
+
+            padding: 14px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .paparan-modal-header h3 {
+            font-size: 16px;
+
+            line-height: 1.4;
+        }
+
+
+        .paparan-close {
+            width: 36px;
+
+            height: 36px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.2);
+
+            color: #ffffff;
+
+            font-size: 23px;
+
+            cursor: pointer;
+        }
+
+
+        .paparan-close:hover {
+            background:
+                rgba(255, 255, 255, 0.35);
+        }
+
+
+        #paparanPdfViewer {
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            flex: 1;
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        .main-footer {
+            background: #ffffff;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+
+        .footer-content {
+            width: 100%;
+
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding: 55px 25px 45px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 40px;
+        }
+
+
+        .footer-brand h3 {
+            margin-bottom: 10px;
+
+            color: #1976d2;
+
+            font-size: 19px;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .footer-brand p {
+            max-width: 300px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer-links {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+
+        .footer-links h4,
+        .footer-social h4 {
+            margin-bottom: 7px;
+
+            color: #1e293b;
+
+            font-size: 14px;
+        }
+
+
+        .footer-links a {
+            width: fit-content;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: color 0.2s ease;
+        }
+
+
+        .footer-links a:hover {
+            color: #1976d2;
+        }
+
+
+        .social-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        .social-list a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            width: fit-content;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: color 0.2s ease;
+        }
+
+
+        .social-list a:hover {
+            color: #1976d2;
+        }
+
+
+        .social-list i {
+            width: 18px;
+
+            text-align: center;
+        }
+
+
+        .footer-bottom {
+            padding: 18px 25px;
+
+            text-align: center;
+
+            border-top: 1px solid #edf0f3;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 900px) {
+
+            .main-navbar {
+                padding: 16px 25px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+
+            .main-nav {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+
+            #paparanMateriList {
+                grid-template-columns: 1fr;
+            }
+
+
+            .footer-content {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .paparan-hero h1 {
+                font-size: 34px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .main-navbar {
+                padding: 15px;
+            }
+
+
+            .main-nav {
+                gap: 10px;
+            }
+
+
+            .main-nav a {
+                font-size: 13px;
+            }
+
+
+            .paparan-hero {
+                padding: 60px 20px;
+            }
+
+
+            .paparan-hero h1 {
+                font-size: 28px;
+            }
+
+
+            .paparan-content {
+                padding: 45px 18px 60px;
+            }
+
+
+            .footer-content {
+                grid-template-columns: 1fr;
+
+                gap: 30px;
+            }
+
+
+            .paparan-modal {
+                padding: 8px;
+            }
+
+
+            .paparan-modal-box {
+                height: 96vh;
+
+                border-radius: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="main-header">
+
+    <div class="header-brand">
+
+        <div class="header-logos">
+
+            <img
+                src="img/logo-dinsos.png"
+                alt="Logo Dinas Sosial Kabupaten Magelang"
+                class="logo-dinsos"
+            >
+
+            <img
+                src="img/logo-kla.png"
+                alt="Logo Kabupaten Layak Anak"
+                class="logo-kla"
+            >
+
+        </div>
+
+        <div class="header-title">
+            <h2>KABUPATEN LAYAK ANAK </h2>
+            <span>MAGELANG</span>
+        </div>
+
+    </div>
+
+
+    <nav class="main-nav">
+
+        <a href="index.html">
+            Beranda
+        </a>
+
+        <a href="profil.html">
+            Profil
+        </a>
+
+        <a href="hak-anak.html">
+            Hak Anak
+        </a>
+
+        <a href="program.html">
+            Program
+        </a>
+
+        <a href="berita.html">
+            Berita
+        </a>
+
+        <a href="galeri.html">
+            Galeri
+        </a>
+
+        <a
+            href="paparan.html"
+            class="active"
+        >
+            Paparan
+        </a>
+
+        <a href="kontak.html">
+            Kontak
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="paparan-hero">
+
+    <div class="paparan-hero-label">
+        MATERI DAN INFORMASI
+    </div>
+
+
+    <h1>
+        Paparan Layak Anak
+    </h1>
+
+
+    <p>
+        Berbagai materi dan informasi mengenai
+        pemenuhan hak serta perlindungan anak
+        yang dapat dibaca oleh masyarakat.
+    </p>
+
+</section>
+
+
+
+<!-- ==================================================
+     CONTENT
+================================================== -->
+
+<main class="paparan-content">
+
+    <div class="paparan-title">
+
+        <h2>
+            Materi Paparan
+        </h2>
+
+
+        <p>
+            Silakan pilih materi yang ingin dibaca.
+            Dokumen PDF akan dibuka langsung
+            pada halaman ini.
+        </p>
+
+    </div>
+
+
+    <div id="paparanMateriList">
+
+    </div>
+
+</main>
+
+
+
+<!-- ==================================================
+     PDF MODAL
+================================================== -->
+
+<div
+    id="paparanModal"
+    class="paparan-modal"
+    onclick="klikLuarPaparan(event)"
+>
+
+
+    <div
+        class="paparan-modal-box"
+        onclick="event.stopPropagation()"
+    >
+
+
+        <div class="paparan-modal-header">
+
+            <h3 id="paparanPdfTitle">
+                Preview PDF
+            </h3>
+
+
+            <button
+                type="button"
+                class="paparan-close"
+                onclick="tutupPaparanPdf()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <iframe
+            id="paparanPdfViewer"
+            title="Preview PDF"
+        ></iframe>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<<footer class="main-footer">
+
+    <div class="footer-content">
+
+        <!-- TOTAL PENGUNJUNG -->
+        <div class="footer-visitors">
+
+            <h4>Total Pengunjung</h4>
+
+            <div class="visitor-number">
+                👥 <span id="totalVisitors">0</span>
+            </div>
+
+            <p>Pengunjung Website</p>
+
+            <div class="visitor-today">
+                📅 <span id="todayVisitors">0</span>
+                Pengunjung Hari Ini
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGASI -->
+        <div class="footer-links">
+
+            <h4>Navigasi</h4>
+
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="hak-anak.html">Hak Anak</a>
+            <a href="program.html">Program</a>
+
+        </div>
+
+
+        <!-- INFORMASI -->
+        <div class="footer-links">
+
+            <h4>Informasi</h4>
+
+            <a href="berita.html">Berita</a>
+            <a href="galeri.html">Galeri</a>
+            <a href="paparan.html">Paparan</a>
+            <a href="kontak.html">Kontak</a>
+
+        </div>
+
+
+        <!-- IKUTI KAMI -->
+        <div class="footer-social">
+
+            <h4>Ikuti Kami</h4>
+
+            <div class="social-list">
+
+                <a
+                    href="https://www.instagram.com/dinsosppkbpppa_kabmagelang?stkn=MW5zY3E2NmZzeXVx"
+                    target="_blank"
+                >
+                    📷 Instagram
+                </a>
+
+                <a
+                    href="https://youtube.com/@dinsosppkbpppakabmagelang2140?si=sB44CmjzR5FT2_qU"
+                    target="_blank"
+                >
+                    ▶️ YouTube
+                </a>
+
+                <div
+                    class="phone-number"
+                    onclick="navigator.clipboard.writeText('0293788167')"
+                    title="Klik untuk menyalin nomor"
+                >
+                    ☎️ 0293788167
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Website Layak Anak.
+        Semua hak dilindungi.
+
+    </div>
+
+</footer>
+</div>
+
+
+<script>
+
+/* ==================================================
+   DATABASE
+================================================== */
+
+const PAPARAN_DB_NAME = "LayakAnakDB";
+
+const PAPARAN_STORE_NAME = "paparan";
+
+
+let paparanDB = null;
+
+let paparanPdfUrl = null;
+
+
+
+/* ==================================================
+   BUKA DATABASE
+================================================== */
+
+function bukaDatabasePaparan() {
+
+    return new Promise(function(resolve, reject) {
+
+        const request =
+            indexedDB.open(PAPARAN_DB_NAME);
+
+
+        request.onsuccess =
+            function(event) {
+
+                paparanDB =
+                    event.target.result;
+
+
+                console.log(
+                    "Database paparan berhasil dibuka."
+                );
+
+
+                if (
+                    !paparanDB.objectStoreNames.contains(
+                        PAPARAN_STORE_NAME
+                    )
+                ) {
+
+                    reject(
+                        new Error(
+                            "Object store paparan tidak ditemukan."
+                        )
+                    );
+
+                    return;
+
+                }
+
+
+                resolve(paparanDB);
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Database error:",
+                    event.target.error
+                );
+
+
+                reject(
+                    event.target.error
+                );
+
+            };
+
+    });
+
+}
+
+
+
+/* ==================================================
+   TAMPILKAN MATERI
+================================================== */
+
+function tampilkanMateriPaparan() {
+
+    const container =
+        document.getElementById(
+            "paparanMateriList"
+        );
+
+
+    if (!paparanDB) {
+
+        tampilkanErrorPaparan(
+            "Database belum siap."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const transaction =
+            paparanDB.transaction(
+                PAPARAN_STORE_NAME,
+                "readonly"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                PAPARAN_STORE_NAME
+            );
+
+
+        const request =
+            store.getAll();
+
+
+        request.onsuccess =
+            function() {
+
+                let data =
+                    request.result || [];
+
+
+                data.sort(
+                    function(a, b) {
+
+                        return (
+                            Number(b.id || 0) -
+                            Number(a.id || 0)
+                        );
+
+                    }
+                );
+
+
+                container.innerHTML = "";
+
+
+                if (!data.length) {
+
+                    container.innerHTML = `
+
+                        <div class="paparan-empty">
+
+                            <div class="paparan-empty-icon">
+                                📄
+                            </div>
+
+                            <h3>
+                                Belum Ada Materi
+                            </h3>
+
+                            <p>
+                                Materi paparan belum tersedia.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                data.forEach(
+                    function(item, index) {
+
+                        const card =
+                            document.createElement(
+                                "article"
+                            );
+
+
+                        card.className =
+                            "paparan-card";
+
+
+                        const nomor =
+                            String(
+                                index + 1
+                            ).padStart(
+                                2,
+                                "0"
+                            );
+
+
+                        const id =
+                            Number(item.id);
+
+
+                        card.innerHTML = `
+
+                            <div class="paparan-number">
+                                MATERI ${nomor}
+                            </div>
+
+
+                            <h3>
+                                ${escapePaparan(
+                                    item.judul ||
+                                    "Tanpa Judul"
+                                )}
+                            </h3>
+
+
+                            <p class="paparan-description">
+                                ${escapePaparan(
+                                    item.deskripsi ||
+                                    "Tidak ada deskripsi."
+                                )}
+                            </p>
+
+
+                            <div class="paparan-pdf">
+
+                                <div class="paparan-pdf-icon">
+                                    📄
+                                </div>
+
+
+                                <div class="paparan-pdf-info">
+
+                                    <strong>
+                                        ${escapePaparan(
+                                            item.namaFile ||
+                                            "Dokumen PDF"
+                                        )}
+                                    </strong>
+
+
+                                    <span>
+                                        Dokumen PDF
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="paparan-button"
+                                onclick="bukaPdfPaparan(${id})"
+                            >
+                                👁 Baca Materi
+                            </button>
+
+                        `;
+
+
+                        container.appendChild(card);
+
+                    }
+                );
+
+            };
+
+
+        request.onerror =
+            function(event) {
+
+                console.error(
+                    "Gagal mengambil data:",
+                    event.target.error
+                );
+
+
+                tampilkanErrorPaparan(
+                    "Materi tidak dapat dibaca dari database."
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Transaction error:",
+            error
+        );
+
+
+        tampilkanErrorPaparan(
+            "Database paparan tidak dapat digunakan."
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   BUKA PDF
+================================================== */
+
+function bukaPdfPaparan(id) {
+
+    if (!paparanDB) {
+
+        alert(
+            "Database belum siap."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const transaction =
+            paparanDB.transaction(
+                PAPARAN_STORE_NAME,
+                "readonly"
+            );
+
+
+        const store =
+            transaction.objectStore(
+                PAPARAN_STORE_NAME
+            );
+
+
+        const request =
+            store.get(id);
+
+
+        request.onsuccess =
+            function() {
+
+                const data =
+                    request.result;
+
+
+                if (!data) {
+
+                    alert(
+                        "Materi tidak ditemukan."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!data.file) {
+
+                    alert(
+                        "File PDF tidak ditemukan pada materi ini."
+                    );
+
+                    return;
+
+                }
+
+
+                if (paparanPdfUrl) {
+
+                    URL.revokeObjectURL(
+                        paparanPdfUrl
+                    );
+
+                    paparanPdfUrl = null;
+
+                }
+
+
+                paparanPdfUrl =
+                    URL.createObjectURL(
+                        data.file
+                    );
+
+
+                document.getElementById(
+                    "paparanPdfTitle"
+                ).textContent =
+                    data.judul ||
+                    "Preview PDF";
+
+
+                document.getElementById(
+                    "paparanPdfViewer"
+                ).src =
+                    paparanPdfUrl;
+
+
+                document.getElementById(
+                    "paparanModal"
+                ).classList.add(
+                    "show"
+                );
+
+            };
+
+
+        request.onerror =
+            function() {
+
+                alert(
+                    "PDF tidak dapat dibuka."
+                );
+
+            };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Kesalahan PDF:",
+            error
+        );
+
+
+        alert(
+            "Materi tidak dapat dibuka."
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   TUTUP PDF
+================================================== */
+
+function tutupPaparanPdf() {
+
+    const modal =
+        document.getElementById(
+            "paparanModal"
+        );
+
+
+    const viewer =
+        document.getElementById(
+            "paparanPdfViewer"
+        );
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+
+    viewer.src = "";
+
+
+    if (paparanPdfUrl) {
+
+        URL.revokeObjectURL(
+            paparanPdfUrl
+        );
+
+        paparanPdfUrl = null;
+
+    }
+
+}
+
+
+
+/* ==================================================
+   KLIK LUAR MODAL
+================================================== */
+
+function klikLuarPaparan(event) {
+
+    if (
+        event.target.id ===
+        "paparanModal"
+    ) {
+
+        tutupPaparanPdf();
+
+    }
+
+}
+
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
+function escapePaparan(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* ==================================================
+   ERROR
+================================================== */
+
+function tampilkanErrorPaparan(pesan) {
+
+    const container =
+        document.getElementById(
+            "paparanMateriList"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="paparan-empty">
+
+            <div class="paparan-empty-icon">
+                ⚠️
+            </div>
+
+
+            <h3>
+                Gagal Memuat Materi
+            </h3>
+
+
+            <p>
+                ${escapePaparan(pesan)}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* ==================================================
+   TOMBOL ESC
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            tutupPaparanPdf();
+
+        }
+
+    }
+);
+
+
+
+/* ==================================================
+   INIT
+================================================== */
+
+async function initPaparan() {
+
+    try {
+
+        await bukaDatabasePaparan();
+
+        tampilkanMateriPaparan();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Paparan initialization error:",
+            error
+        );
+
+
+        tampilkanErrorPaparan(
+            "Database materi tidak dapat dibuka."
+        );
+
+    }
+
+}
+
+
+initPaparan();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1386 @@
+﻿
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #f4f7fb;
+
+            color:
+                #1e293b;
+
+            min-height:
+                100vh;
+
+        }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        header {
+
+            height:
+                78px;
+
+            background:
+                #ffffff;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding:
+                0 52px;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+        }
+
+
+        .logo {
+
+            color:
+                #1976d2;
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                2px;
+
+        }
+
+
+        .admin-area {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+        }
+
+
+        .admin-name {
+
+            font-weight:
+                700;
+
+            color:
+                #334155;
+
+        }
+
+
+        .logout-btn {
+
+            border:
+                none;
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+            padding:
+                11px 19px;
+
+            border-radius:
+                10px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background:
+                #fecaca;
+
+        }
+
+
+
+        /* ==================================================
+           CONTAINER
+        ================================================== */
+
+        .container {
+
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                50px 25px 80px;
+
+        }
+
+
+        .page-title {
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .page-title h1 {
+
+            font-size:
+                38px;
+
+            color:
+                #172b4d;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .page-title p {
+
+            color:
+                #64748b;
+
+            font-size:
+                16px;
+
+        }
+
+
+
+        /* ==================================================
+           CARD
+        ================================================== */
+
+        .card {
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius:
+                18px;
+
+            padding:
+                30px;
+
+            margin-bottom:
+                30px;
+
+            box-shadow:
+                0 8px 30px
+                rgba(15, 23, 42, 0.05);
+
+        }
+
+
+        .card h2 {
+
+            color:
+                #172b4d;
+
+            font-size:
+                24px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .card-description {
+
+            color:
+                #64748b;
+
+            line-height:
+                1.6;
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+
+        /* ==================================================
+           FORM
+        ================================================== */
+
+        .form-group {
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .form-group label {
+
+            display:
+                block;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #334155;
+
+        }
+
+
+        .form-group input[type="text"],
+
+        .form-group textarea {
+
+            width:
+                100%;
+
+            border:
+                1px solid #d7dee8;
+
+            border-radius:
+                10px;
+
+            padding:
+                14px 15px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                15px;
+
+            outline:
+                none;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .form-group input[type="text"]:focus,
+
+        .form-group textarea:focus {
+
+            border-color:
+                #1976d2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(25,118,210,0.10);
+
+        }
+
+
+        .form-group textarea {
+
+            min-height:
+                130px;
+
+            resize:
+                vertical;
+
+            line-height:
+                1.6;
+
+        }
+
+
+
+        /* ==================================================
+           UPLOAD PDF
+        ================================================== */
+
+        .upload-box {
+
+            border:
+                2px dashed #cbd5e1;
+
+            border-radius:
+                16px;
+
+            padding:
+                30px;
+
+            background:
+                #f8fafc;
+
+            text-align:
+                center;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .upload-box.dragover {
+
+            border-color:
+                #1976d2;
+
+            background:
+                #eff6ff;
+
+        }
+
+
+        .upload-icon {
+
+            width:
+                70px;
+
+            height:
+                70px;
+
+            margin:
+                0 auto 15px;
+
+            border-radius:
+                18px;
+
+            background:
+                #e3f2fd;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                35px;
+
+        }
+
+
+        .upload-box h3 {
+
+            color:
+                #172b4d;
+
+            font-size:
+                20px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .upload-box p {
+
+            color:
+                #64748b;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .choose-file-btn {
+
+            display:
+                inline-block;
+
+            background:
+                #1976d2;
+
+            color:
+                white;
+
+            padding:
+                13px 25px;
+
+            border-radius:
+                10px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .choose-file-btn:hover {
+
+            background:
+                #1565c0;
+
+        }
+
+
+        #filePdf {
+
+            display:
+                none;
+
+        }
+
+
+        .upload-info {
+
+            margin-top:
+                15px;
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+
+        /* ==================================================
+           FILE PREVIEW
+        ================================================== */
+
+        .file-preview {
+
+            display:
+                none;
+
+            margin-top:
+                20px;
+
+            padding:
+                15px;
+
+            border:
+                1px solid #bfdbfe;
+
+            border-radius:
+                12px;
+
+            background:
+                #eff6ff;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            text-align:
+                left;
+
+        }
+
+
+        .file-preview.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .file-icon {
+
+            width:
+                50px;
+
+            height:
+                50px;
+
+            border-radius:
+                10px;
+
+            background:
+                #fee2e2;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                25px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .file-details {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+        }
+
+
+        .file-details strong {
+
+            display:
+                block;
+
+            color:
+                #172b4d;
+
+            word-break:
+                break-word;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .file-details span {
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .remove-file {
+
+            border:
+                none;
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+            width:
+                35px;
+
+            height:
+                35px;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                700;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+
+        /* ==================================================
+           BUTTON
+        ================================================== */
+
+        .button-area {
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            margin-top:
+                25px;
+
+        }
+
+
+        .save-btn,
+
+        .reset-btn,
+
+        .cancel-edit-btn {
+
+            border:
+                none;
+
+            padding:
+                13px 23px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                15px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .save-btn {
+
+            background:
+                #1976d2;
+
+            color:
+                white;
+
+        }
+
+
+        .save-btn:hover {
+
+            background:
+                #1565c0;
+
+        }
+
+
+        .save-btn:disabled {
+
+            background:
+                #94a3b8;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        .reset-btn {
+
+            background:
+                #e2e8f0;
+
+            color:
+                #334155;
+
+        }
+
+
+        .reset-btn:hover {
+
+            background:
+                #cbd5e1;
+
+        }
+
+
+        .cancel-edit-btn {
+
+            display:
+                none;
+
+            background:
+                #fef3c7;
+
+            color:
+                #92400e;
+
+        }
+
+
+        .cancel-edit-btn.show {
+
+            display:
+                inline-block;
+
+        }
+
+
+
+        /* ==================================================
+           STATUS
+        ================================================== */
+
+        #statusMessage {
+
+            display:
+                none;
+
+            padding:
+                14px 17px;
+
+            border-radius:
+                10px;
+
+            margin-top:
+                20px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        #statusMessage.success {
+
+            display:
+                block;
+
+            background:
+                #dcfce7;
+
+            color:
+                #166534;
+
+        }
+
+
+        #statusMessage.error {
+
+            display:
+                block;
+
+            background:
+                #fee2e2;
+
+            color:
+                #991b1b;
+
+        }
+
+
+        #statusMessage.info {
+
+            display:
+                block;
+
+            background:
+                #dbeafe;
+
+            color:
+                #1e40af;
+
+        }
+
+
+
+        /* ==================================================
+           DATABASE STATUS
+        ================================================== */
+
+        .database-status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            margin-top:
+                15px;
+
+            padding:
+                8px 13px;
+
+            border-radius:
+                20px;
+
+            background:
+                #fef3c7;
+
+            color:
+                #92400e;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .database-status.ready {
+
+            background:
+                #dcfce7;
+
+            color:
+                #166534;
+
+        }
+
+
+        .status-dot {
+
+            width:
+                8px;
+
+            height:
+                8px;
+
+            border-radius:
+                50%;
+
+            background:
+                currentColor;
+
+        }
+
+
+
+        /* ==================================================
+           DATA HEADER
+        ================================================== */
+
+        .data-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .data-count {
+
+            background:
+                #e3f2fd;
+
+            color:
+                #1976d2;
+
+            padding:
+                8px 14px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+
+        /* ==================================================
+           MATERI ITEM
+        ================================================== */
+
+        #materiAdminList {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                15px;
+
+        }
+
+
+        .materi-item {
+
+            border:
+                1px solid #e2e8f0;
+
+            border-radius:
+                14px;
+
+            padding:
+                20px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .materi-item:hover {
+
+            border-color:
+                #bfdbfe;
+
+            box-shadow:
+                0 5px 20px
+                rgba(25,118,210,0.07);
+
+        }
+
+
+        .materi-info {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+        }
+
+
+        .materi-label {
+
+            color:
+                #1976d2;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .materi-info h3 {
+
+            font-size:
+                19px;
+
+            color:
+                #172b4d;
+
+            margin-bottom:
+                7px;
+
+            word-break:
+                break-word;
+
+        }
+
+
+        .materi-info p {
+
+            color:
+                #64748b;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.5;
+
+            margin-bottom:
+                10px;
+
+            white-space:
+                pre-line;
+
+        }
+
+
+        .materi-file {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid #e2e8f0;
+
+            padding:
+                7px 10px;
+
+            border-radius:
+                8px;
+
+            color:
+                #475569;
+
+            font-size:
+                13px;
+
+            max-width:
+                100%;
+
+        }
+
+
+        .materi-actions {
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .edit-btn,
+
+        .delete-btn {
+
+            border:
+                none;
+
+            padding:
+                10px 15px;
+
+            border-radius:
+                8px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .edit-btn {
+
+            background:
+                #dbeafe;
+
+            color:
+                #1d4ed8;
+
+        }
+
+
+        .edit-btn:hover {
+
+            background:
+                #bfdbfe;
+
+        }
+
+
+        .delete-btn {
+
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+
+        }
+
+
+        .delete-btn:hover {
+
+            background:
+                #fecaca;
+
+        }
+
+
+
+        /* ==================================================
+           EMPTY
+        ================================================== */
+
+        .empty {
+
+            text-align:
+                center;
+
+            padding:
+                50px 20px;
+
+            border:
+                1px dashed #cbd5e1;
+
+            border-radius:
+                12px;
+
+            color:
+                #64748b;
+
+        }
+
+
+        .empty-icon {
+
+            font-size:
+                40px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+
+        /* ==================================================
+           EDIT MODE
+        ================================================== */
+
+        .edit-mode {
+
+            border:
+                2px solid #93c5fd;
+
+            background:
+                #f8fbff;
+
+        }
+
+
+        .edit-badge {
+
+            display:
+                none;
+
+            background:
+                #dbeafe;
+
+            color:
+                #1d4ed8;
+
+            padding:
+                8px 12px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .edit-badge.show {
+
+            display:
+                inline-block;
+
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+
+            text-align:
+                center;
+
+            padding:
+                25px;
+
+            color:
+                #64748b;
+
+            font-size:
+                13px;
+
+        }
+
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding:
+                    0 20px;
+
+            }
+
+
+            .admin-name {
+
+                display:
+                    none;
+
+            }
+
+
+            .container {
+
+                padding:
+                    35px 15px 60px;
+
+            }
+
+
+            .card {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .page-title h1 {
+
+                font-size:
+                    30px;
+
+            }
+
+
+            .materi-item {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+            }
+
+
+            .materi-actions {
+
+                width:
+                    100%;
+
+            }
+
+
+            .edit-btn,
+
+            .delete-btn {
+
+                flex:
+                    1;
+
+            }
+
+
+            .button-area {
+
+                flex-wrap:
+                    wrap;
+
+            }
+
+        }
+
